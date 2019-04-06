@@ -1,0 +1,659 @@
+body{
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.map-container2 {
+	position: absolute;
+	top: -150px;
+	left: -220px;
+  	width: 200%;
+  	height: 800px;
+/*  	width: 1200px;
+  	height: 3500px;*/
+
+	/*tilt code*/
+     -webkit-transform: perspective(500px) rotateX(50deg) !important;
+
+
+/*          -webkit-transform: perspective(1000px) rotate3d(45, 1, 0, 45deg) rotateX(-45deg) !important;
+     -moz-transform: perspective(1000px) rotate3d(45, 1, 0, 45deg) rotateX(-45deg) !important;
+     -o-transform: perspective(1000px) rotate3d(45, 1, 0, 45deg) rotateX(-45deg)!important;
+     transform: perspective(1000px) rotate3d(45, 1, 0, 45deg) rotateX(-45deg)!important;*/
+}
+.map-container1{
+	position: relative;
+	height: 703px;
+	width: 100%;
+	overflow: hidden;
+}
+
+#map {
+    position: relative;
+    margin-top: 0px;
+    height: 100%; 
+    width: 100%; 
+ }
+
+.layout_luckySpin .userpanel{
+	display: none;
+}
+
+.layout_luckySpin .map{
+	display: none;
+}
+
+.display .no{
+	display: none;
+}
+
+.controlPanel{
+	position: absolute;
+	bottom: 0px;
+	height: 250px;
+	width: 95%;
+	left: 5px;
+	background: url('images/background1.png');
+	background-size: 100% 250px;
+	background-repeat: no-repeat;
+}
+
+.goLucySpin{
+	position: absolute;
+	top: 10px;
+	left: 200px;
+	height: 50px;
+	width: 110px;
+	background: url('images/goldButton.png');
+	background-size: 110px 50px;
+}
+/*.goldBtn{
+	position: absolute;
+	left: 60%;
+	top: 230px;
+	width: 80px;
+	height: 40px;
+	background: url('images/goldButton.png');
+	background-size: 80px 40px;
+}
+
+.goldBtn:active {
+	background: url('images/goldButton_pressed.png');
+	background-size: 80px 40px;
+}*/
+
+.goLucySpin:active {
+	transform: translateY(4px);
+}
+
+.layout_main .luckySpin{
+	display: none;
+}
+
+/*.wheelbg{
+	position: absolute;
+	height: 700px;
+	width: 100%;
+	background: url('images/wheelbg1.png');
+	background-size: 110% 700px;
+}*/
+/*.wheelbg{
+	position: absolute;
+	height: 700px;
+	width: 100%;
+	background: url('images/wheelbg100.png');
+		background-size: 110% 700px;
+		    	background-color: red;
+
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 1s; 
+       animation-name: example;
+    animation-duration: 1s;
+    border: 1px solid red;
+}*/
+
+
+/*@-webkit-keyframes example {
+    0%  {
+    	background-color: red;
+    	background: url('images/wheelbg100.png');
+	}
+    25%  {background-color: yellow;}
+    50%  {background-color: blue;}
+    100% {
+    	background-color: blue;
+    	background: url('images/wheelbg50.png');
+	}
+}*/
+
+
+.profile{
+	font-size: 15px;
+	height:100px;
+	width: 130px;
+	position: absolute;
+	text-align: center;
+	top: 3%;
+	left: 5%;
+}
+
+.selectedPlayerInfo{
+	float: center;
+	font-size: 15px;
+	display: none;
+	position: absolute;
+	left: 70%;
+	top: 3%;
+	width: 120px;
+	height: 100px;
+	border: 1px solid white;
+	background: rgba(1,1,1,0.5);
+	border-radius: 10px;
+	color: white;
+}
+.p2Name{
+	line-height: 0.5;
+}
+
+.p2Level{
+	line-height: 0.5;
+}
+
+/*.attack{
+	line-height: 0.5;
+}*/
+
+.username{
+	display: inline;
+	font-size: 20px;
+	float: center;
+}
+.userlevel{
+	display: inline;
+	font-size:12px;
+	float: center;
+}
+
+
+
+.skills{
+	position: absolute;
+	bottom: 47px;
+	right: 5px;
+	width: 180px;
+	height: 150px;
+
+/*	background: url('images/skillbg.png');
+	background-size:180px 150px;*/
+/*	z-index:11px;*/
+
+}
+/*
+.skill{
+	position: relative;
+	left: 10px;
+	top: 20px;
+	display: inline-block;
+	z-index:10;
+	height: 40px;
+	width: 40px;
+	background: url('images/frame_yellow.png');
+	background-size: 40px 40px;
+	margin-right: -8px;
+	margin-top: -8px;
+}*/
+
+.skill{
+	position: relative;
+	display: inline-block;
+	height: 50px;
+	width: 60px;
+	margin-right: -7px;
+	margin-bottom: -6px;
+
+/*	background: url('images/skills/skillbg.png');
+	background-size:56px 35px;
+	background-repeat: no-repeat;
+	background-position: center bottom;*/
+}
+.skill:active {
+	transform: translateY(4px);
+}
+
+.base{
+	position: absolute;
+	bottom:0px;
+	width:65px;
+	height:34px;
+	background: url('images/skills/skillbg.png');
+	background-size: 65px 34px;
+
+}
+
+.GODSEYE{
+	width:65px;
+	height:45px;
+	background: url('images/skills/eyeball_seat.png');
+	background-size: 65px 45px;
+}
+.GODSEYE-ADVANCE{
+	width:65px;
+	height:45px;
+	background: url('images/skills/eyeballx_seat.png');
+	background-size:65px 45px;
+}
+.HIDE{
+	width:65px;
+	height:45px;
+	background: url('images/skills/hide_seat.png');
+	background-size:65px 45px;
+}
+
+.SCAN{
+	width:65px;
+	height:45px;
+	background: url('images/skills/landmine_seat.png');
+	background-size:65px 45px;
+}
+.POWER-MAX{
+	width:65px;
+	height:45px;
+	background: url('images/skills/powermax_seat.png');
+	background-size:65px 45px;
+}
+
+.ATTACK-MAX{
+	width:65px;
+	height:45px;
+	background: url('images/skills/attackmax_seat.png');
+	background-size:65px 45px;
+}
+
+.CHEAT{
+
+}
+
+
+
+
+/*.attackSkillsContanier{
+	position:absolute;
+	bottom: 80px;
+	left: 45%;
+	height: 100px;
+	width: 100px;
+}
+.attackSkill{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background: url('images/frame_red.png');
+	background-size: 40px 40px;
+	margin-right: -8px;
+	margin-top: -8px;
+}*/
+
+.skillBtn{
+	position: absolute;
+	left: 68%;
+	bottom: 5px;
+	width: 50px;
+	height: 55px;
+	background: url('images/skills/skill_btn.png');
+	background-size: 50px 55px;
+	background-position:center bottom;
+	background-repeat: no-repeat;
+}
+
+.skillBtn_disabled{
+	position: absolute;
+	left: 68%;
+	bottom: 5px;
+	width: 50px;
+	height: 55px;
+	background: url('images/skills/skill_btn_disabled.png');
+	background-size: 50px 55px;
+	background-position:center bottom;
+	background-repeat: no-repeat;
+}
+
+.skillBtn:active {
+	background: url('images/skills/skill_btn_pressed.png');
+	background-size: 50px 45px;
+	background-position: center bottom;
+	background-repeat: no-repeat;
+}
+
+.rotateTargetContainer{
+	position: absolute;
+	top:-50px;
+	left: 38%;
+}
+
+/*unready*/
+.targetBtn.unready{
+	width: 100px;
+	height:100px;
+	background: url('images/rotateTarget_dark.png') left center;
+	background-size: 500px 100px;
+	animation: unreadyPlay 0.8s steps(5) infinite;
+}
+
+@keyframes unreadyPlay {
+   100% { background-position: -500px; }
+}
+
+.targetBtn.unready:active {
+	transform: translateY(4px);
+}
+
+/*ready*/
+.targetBtn.ready{
+	width: 100px;
+	height: 100px;
+	background: url('images/rotateTarget_normal.png') left center;
+	background-size: 500px 100px;
+	animation: readyPlay 0.8s steps(5) infinite;
+}
+
+@keyframes readyPlay {
+   100% { background-position: -500px; }
+}
+
+.targetBtn.ready:active {
+	transform: translateY(4px);
+}
+
+.levelMedal{
+	float:left;
+	margin: 5px;
+	width: 18px;
+	height: 30px;
+	background: url('images/levelBadge0.png') left center;
+	animation: levelMedalPlay 1s steps(6) infinite;
+	background-repeat: no-repeat;
+	background-size: 120px 30px;
+}
+@keyframes levelMedalPlay {
+   100% { background-position: -120px; }
+}
+
+.levelMedalValue{
+	float:left;
+	margin: 10px;
+}
+.goldCoin{
+	float: left;
+	margin:6px;
+	margin-top:-5px;
+	width: 18px;
+	height: 20px;
+	background: url('images/goldCoin.png') left center;
+	background-size: 140px 20px;
+	animation: goldCoinPlay 0.7s steps(7) infinite;
+	background-repeat: no-repeat;
+}
+@keyframes goldCoinPlay {
+   100% { background-position: -140px; }
+}
+
+.goldCoinValue{
+	float: left;
+	margin:6px;
+	margin-top:-5px;
+}
+
+
+.starContainer{
+	position: absolute;
+	bottom: -10px;
+	text-align: center;
+	left:-10px;
+	right:-10px;
+	width: 70px;
+}
+.star{
+	position: relative;
+	display: inline-block;
+	height: 15px;
+	width: 15px;
+	background: url('images/star4.png');
+	background-size: 15px 15px;
+	z-index: 11;
+	margin:-1px;
+}
+
+/*.badge1{
+	height: 37px;
+	width: 24px;
+	background: url('images/badge_flat.png') -72px 0;
+	background-size: 120px 74px;
+	z-index: 10;
+	position: relative;
+	top: -20px;
+	left: 30%;
+}
+
+.selected .badge1{
+	height: 40px;
+	width: 26px;
+	background: url('images/badge_shaded.png') -104px 0;
+	background-size: 130px 80px;
+	z-index: 10;
+	position: relative;
+	top: -20px;
+	left: 30%;
+}
+.badge2{
+	height: 37px;
+	width: 24px;
+	background: url('images/badge_flat.png') 0 0;
+	background-size: 120px 74px;
+	z-index: 10;
+	position: relative;
+	top: -20px;
+	left: 30%;
+}
+.selected .badge2{
+	height: 40px;
+	width: 26px;
+	background: url('images/badge_shaded.png') -52px 0;
+	background-size: 130px 80px;
+	z-index: 10;
+	position: relative;
+	top: -20px;
+	left: 30%;
+}
+
+.badge3{
+	height: 37px;
+	width: 24px;
+	background: url('images/badge_flat.png') -96px 0;
+	background-size: 120px 74px;
+	z-index: 10;
+	position: relative;
+	top: -20px;
+	left: 30%;
+}
+.selected .badge3{
+	height: 40px;
+	width: 26px;
+	background: url('images/badge_shaded.png') -78px 0;
+	background-size: 130px 80px;
+	z-index: 10;
+	position: relative;
+	top: -20px;
+	left: 30%;
+}
+*/
+
+
+.rolesContainer{
+	position: absolute;
+	top: 15px;
+	left: 2px;
+	width: 160px;
+/*	border: 1px solid white;
+*/}
+
+.role{
+	position: relative;
+	width: 50px;
+	height: 85px;
+	margin-top: 20px;
+	margin-left: 20px;
+	display: inline-block;
+	text-align: center;
+	color: black;
+	font-size: 5px;
+/*	border: 1px solid white;
+*/
+}
+
+.role:active {
+	transform: translateY(4px);
+}
+
+.curtain_none{
+	display: none;
+}
+.curtain_left{
+	position: absolute;
+	height: 60px;
+	width: 20px;
+	top: -12px;
+	left: -3px;
+	background: url('images/curtain_left.png');
+	background-size: 20px 60px;
+	z-index:12;
+}
+
+.curtain_right{
+	position: absolute;
+	height: 60px;
+	width: 20px;
+	top: -12px;
+	right: -3px;
+	background: url('images/curtain_right.png');
+	background-size: 20px 60px;
+	z-index:12;
+}
+.curtain_top{
+	position: absolute;
+	height: 15px;
+	width: 50px;
+	top: -12px;
+	left: 0px;
+	background: url('images/curtain_top.png');
+	background-size: 50px 15px;
+	z-index:10;
+}
+
+.char{
+	position:absolute;
+	left: 10px;
+	bottom: 15px;
+	width:30px;
+	height:75px;
+	z-index:11;
+}
+
+.abled .detective{
+	background: url('images/char/detective.png');
+	background-size: 30px 75px;
+}
+
+.abled .gangster{
+	background: url('images/char/gangster.png');
+	background-size: 30px 75px;
+}
+
+.abled .farmer{
+	background: url('images/char/farmer.png');
+	background-size: 30px 75px;
+}
+
+.abled .geisha{
+	background: url('images/char/geisha.png');
+	background-size: 30px 75px;
+}
+
+.unabled .char{
+	background: url('images/char/char_unknown.png');
+	background-size: 30px 75px;
+}
+/*.detective{
+	position:absolute;
+	left: 20px;
+	bottom: 15px;
+	width:30px;
+	height:80px;
+	z-index:11;
+	background-repeat: no-repeat;
+	background: url('images/detective.png');
+	background-size: 30px 80px;
+
+}*/
+
+.carpet{
+	position:absolute;
+	bottom:0px;
+	left: 0px;
+	bottom: 0px;
+	width: 50px;
+	height: 35px;
+	background-repeat: no-repeat;
+	background: url('images/carpet.png');
+	background-size: 50px 35px;
+	z-index:10;
+}
+/*.roleLevel{
+	width: 22%;
+	display: inline-block;
+	text-align: center;
+	color: white;
+	font-size: 13px;
+}*/
+
+/*.c1{
+	background-color:  #B7D5DD;
+}
+.c2{
+	background-color: #B7D5C7;
+}
+.c3{
+	background-color: #B7D5AE;
+}
+.c4{
+	background-color: #B7D593;
+}*/
+/*.selected has to be placed after .role to matain piority.*/
+.upgrade{
+
+	bottom: 10px;
+	left: 50%;
+
+}
+
+.insert{
+	bottom: 60px;
+	left: 50%;
+}
+
+.roleimg{
+	position: absolute;
+	left: 5%;
+	top:20%;
+}
+.rolelevel{
+	position: absolute;
+	top: 60%;
+	left:5%;
+}
+
+.external_control{
+	position: absolute;
+	right: 5%;
+	top: -20px;
+}
+

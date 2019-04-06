@@ -1,0 +1,56 @@
+<template name = "UserLogin">
+<head>
+<meta charset="UTF-8">
+      <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<div class="stars"></div>
+	<div class="twinkling"></div>
+
+	<p id="logo" class="animated fadeInUp" >THE TRICK. </p> 
+	{{> loginButtons }}	
+
+	<p id= "loginform" class="animated fadeInUp form" >
+		<span class="errormsg"> {{errorMessage}}</span><br>
+	  	USERNAME &ensp; <input id="login-username" type="text"><br><br>
+		PASSWORD &ensp; <input id="login-password" type="password"><br><br><br>
+		<span class="tonggle"> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sign up here </span>
+		
+	</p>	
+
+	<p id= "signupform" class="animated fadeInUp form" display= "none">
+		<span class="errormsg"> {{errorMessage}}</span><br>
+	  	USERNAME &ensp; <input id="signup-username" type="text"><br><br>
+		PASSWORD &ensp; <input id="signup-password" type="password"><br><br>
+		re-enter &ensp; <input id="signup-repassword" type="password"><br><br>
+		<span class="tonggle"> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;I have an account </span>
+	</p>
+
+	
+	
+<a class="submit"><p id= "forwarding-arrow" class="animated fadeInDown"><i class="icon icon-arrow-down"></i></p></a>
+
+<script>
+	var signupform = document.getElementById("signupform");
+	var loginform = document.getElementById("loginform");
+	signupform.style.display = "none";
+
+	$(".tonggle").click(function(){
+		Session.set('errorMessage',"");
+    	if(signupform.style.display == "none"){ 
+    		//in login
+    		loginform.style.display = "none";
+			signupform.style.display = "block";
+    		
+    	}else{ 
+    		//in signup
+    		signupform.style.display = "none";
+    		loginform.style.display = "block";
+    	}
+	});
+	
+</script>
+
+
+</body>
+</template>

@@ -1,0 +1,120 @@
+<template name="Userpanel">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Sigmar+One" />
+<body>
+
+<div class="selectedPlayerInfo">
+	<p class="p2Name">{{p2Name}}</p>
+	<p class="p2Level">LV: {{p2Level}}</p>
+</div>
+
+<!-- <div class="goLucySpin"></div> -->
+
+{{#if Template.subscriptionsReady}}
+
+
+<!-- <div class="profile">
+	{{#with user}}
+		<p class="username">{{username}}</p>
+		<P class="userlevel">LV: {{level}}</p>
+		<p class="userlevel"> {{position}}</p>
+		<div class="levelMedal"></div><div class="levelMedalValue">{{level}}</div>
+		<div class="goldCoin"></div><div class="goldCoinValue">{{goldCoin}}</div>
+	{{/with}}
+</div> -->
+
+
+<table class="profile">
+		{{#with user}}
+  <tr>
+  	<td class="levelMedal"></td>
+  	<td class="levelMedalValue">{{level}}</td>
+  </tr>
+  <tr>
+  	<td class="goldCoin"></td>
+  	<td class="goldCoinValue">{{goldCoin}}</td>
+  </tr>
+  	{{/with}}
+</table>
+
+
+<div class="controlPanel">
+
+	<div class="rotateTargetContainer"><div class="animated bounceInDown"><p class="targetBtn unready"></p></div></div>
+
+<!-- 	<div class="attackSkillsContanier">
+		<div class="attackSkill"></div>
+		<div class="attackSkill"></div>
+		<div class="attackSkill"></div>
+		<div class="attackSkill"></div>
+	</div> -->
+
+	<div class = "external_control">
+		<div class="upgrade"> upgrade</div>
+		<div class="insert">insert</div>
+		<div class='insertSkill'>insert skill</div>
+	</div>
+
+	<div class="skills">
+		<div class="skill"><div id =0 class=" {{skill 0}} base"></div></div>
+		<div class="skill"><div id =1 class=" {{skill 1}} base"></div></div>
+		<div class="skill"><div id =2 class=" {{skill 2}} base"></div></div>
+		<div class="skill"><div id =3 class=" {{skill 3}} base"></div></div>
+		<div class="skill"><div id =4 class=" {{skill 4}} base"></div></div>
+		<div class="skill"><div id =5 class=" {{skill 5}} base"></div></div>
+		<div class="skill"><div id =6 class=" {{skill 6}} base"></div></div>
+		<div class="skill"><div id =7 class=" {{skill 7}} base"></div></div>
+		<div class="skill"><div id =8 class=" {{skill 8}} base"></div></div>
+	</div>
+
+	<div class="skillsApply"><div class={{skillBtn_state}}></div></div>
+
+	<div class="rolesContainer">
+		<div name=0 class="role {{isable 0}}">{{role 0}}
+			<div class="{{curtain 0}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char detective'></div>
+			<div class='carpet'></div>
+			<div class='starContainer'>{{star 0}}</div>
+		</div>
+		<div name=1 class="role {{isable 1}}">{{role 1}}
+			<div class="{{curtain 1}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char gangster'></div>
+			<div class='carpet'></div>
+			<div class='starContainer'>{{star 1}}</div>
+		</div>
+		<div name=2 class="role {{isable 2}}">{{role 2}}
+			<div class="{{curtain 2}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char farmer'></div>	
+			<div class='carpet'></div>
+			<div class='starContainer'>{{star 2}}</div>
+		</div>
+		<div name=3 class="role {{isable 3}}">{{role 3}}
+			<div class="{{curtain 3}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char geisha'></div>	
+			<div class='carpet'></div>
+			<div class='starContainer'>{{star 3}}</div>
+		</div>
+
+	</div>
+
+<!-- <p class="roleimg animated fadeInUp">selectedRole.img</p>
+<p class="rolelevel animated fadeInLeft" >{{selectedRolelevel}}</p> -->
+</div>
+
+{{else}} loading...
+{{/if}}
+</body>
+
+</template>
+
+
+
+
+
