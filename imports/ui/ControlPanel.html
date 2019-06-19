@@ -1,0 +1,107 @@
+<template name="ControlPanel">
+
+<body>
+
+<div class = "sky"></div>
+
+<div class = "board">
+	<div id = "board_attackMax"></div>
+	<div id = "board_cheat"></div><div id = "board_cheat_timer">{{cheat_timer}}</div>
+	<div id = "board_powerMax"></div><div id = "board_powerMax_timer">{{power_timer}}</div>
+</div>
+
+<div class = "menu_button">MENU</div>
+
+<div class = "venture">TRY MY LUCK</div>
+
+<div id = "notePopup1"><div class = "noteContainer"><div id = "note1" class = "note"></div></div></div>
+<div id = "notePopup2"><div id = "note2" class = "note"></div></div>
+
+<div id = "winPopup1"><div class = "win_text">YOU WIN!</div></div>
+<div id = "winPopup2"><div id = "reward_text" class = "reward_text">{{reward}} COINS</div></div>
+
+<div id = "drawPopup"><div class = "draw_text">DRAW!</div></div>
+
+<div id = "losePopup"><div class = "lose_text">YOU LOSE!</div></div>
+
+{{#if Template.subscriptionsReady}}
+
+<table class="profile">
+		{{#with user}}
+  <tr>
+  	<td class="levelMedal"></td>
+  	<td class="levelMedalValue">{{level}}</td>
+  </tr>
+  <tr>
+  	<td class="goldCoin"></td>
+  	<td class="goldCoinValue">{{goldCoin}}</td>
+  </tr>
+  	{{/with}}
+</table>
+
+<div class="controlPanel">
+	<div class="rotateTargetContainer"><div class="animated bounceInDown"><p class="targetBtn unready"></p></div></div>
+	<div id = 'attack_text'>ATTACK!</div>
+	<div class = skill_name>{{skillName}}</div>
+	<div class="skills">
+		<div class="skill"><div id =0 class=" {{skill 0}} base"></div></div>
+		<div class="skill"><div id =1 class=" {{skill 1}} base"></div></div>
+		<div class="skill"><div id =2 class=" {{skill 2}} base"></div></div>
+		<div class="skill"><div id =3 class=" {{skill 3}} base"></div></div>
+		<div class="skill"><div id =4 class=" {{skill 4}} base"></div></div>
+		<div class="skill"><div id =5 class=" {{skill 5}} base"></div></div>
+		<div class="skill"><div id =6 class=" {{skill 6}} base"></div></div>
+		<div class="skill"><div id =7 class=" {{skill 7}} base"></div></div>
+		<div class="skill"><div id =8 class=" {{skill 8}} base"></div></div>
+	</div>
+
+	<div class="skillsApply"><div class={{skillBtn_state}}></div></div>
+
+	<div class="rolesContainer">
+		<div name=0 class="role {{isable 0}}">
+			<div class="{{curtain 0}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char detective'></div>
+			<div class='carpet'></div>
+			<div class='starContainer'>{{star 0}}</div>
+		</div>
+		<div name=1 class="role {{isable 1}}">
+			<div class="{{curtain 1}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char gangster'></div>
+			<div class='carpet'></div>
+			<div class='starContainer'>{{star 1}}</div>
+		</div>
+		<div name=2 class="role {{isable 2}}">
+			<div class="{{curtain 2}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char farmer'></div>	
+			<div class='carpet'></div>
+			<div class='starContainer'>{{star 2}}</div>
+		</div>
+		<div name=3 class="role {{isable 3}}">
+			<div class="{{curtain 3}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char geisha'></div>	
+			<div class='carpet'></div>
+			<div class='starContainer'>{{star 3}}</div>
+		</div>
+
+	</div>
+
+</div>
+
+{{else}} <div class = "loading">loading...</div>
+{{/if}}
+</body>
+
+</template>
+
+
+
+
+

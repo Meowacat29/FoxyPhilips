@@ -1,0 +1,57 @@
+<template name="Story">
+
+<body>
+	<audio autoplay loop>
+      <source src="/audio/Gentle-Closure_Looping.mp3">
+	</audio>
+
+	<div class = story_container>
+		<div class = cloud1></div>
+		<div class = cloud2></div>
+		<div class = petal1></div>
+		<div class = petal2></div>
+		<div class = petal3></div>
+		<div class = landscape></div>
+		{{> Template.dynamic template = component}}
+	</div>
+
+</body>
+
+</template>
+
+<template name="Welcome">
+  <div class = title>FOXY  PHILIPS</div>
+  <div class = story_start>start</div>
+  <div class = story_skip>skip story</div>
+</template>
+
+<template name="Story_p1">
+  <div class = "story">
+  	<div class = "paragraph">Philips, a young banker who just got his promotion, plans to spend his annual vacation on a long journey. </div>
+  </div>
+</template>
+
+<template name="Story_p2">
+  <div class = story>
+	<div class = "paragraph">One day he enters a small village. As he set foot in this place he gains a very strange feeling...</div>
+  </div>
+</template>
+
+<template name="Story_p3">
+  <div class = story>
+  	<div class = "paragraph">Every person in this village has multiple identities. </div>
+  	<div class = "paragraph">They hide their real identity from others to stay alive. </div>
+  </div>
+</template>
+
+<template name="Story_p4">
+  <div class = story>
+  <div class = "paragraph">Can simple naive philips survive in this small village</div>
+  </div>
+</template>
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+<template name = "Login">
+
+	<div id= "loginform" class="animated fadeInUp form" >
+		<div class = "login">login</div>
+		<div class="errormsg"> {{errorMessage}}</div>
+	  	<div class = "username"> USERNAME &ensp; <input id="login-username" type="text"> </div>
+		<div class = "password"> PASSWORD &ensp; <input id="login-password" type="password"> </div>
+		<div class = "tonggle">Create an account</div>
+		<div class = "submit">OK</div>
+	</div>	
+
+	<div id= "signupform" class="animated fadeInUp form" display= "none">
+		<div class = "signup">signup</div>
+		<div class ="errormsg"> {{errorMessage}}</div>
+	  	<div class = "username"> USERNAME &ensp; <input id="signup-username" type="text"></div>
+		<div class = "password"> PASSWORD &ensp; <input id="signup-password" type="password"></div>
+		<div class = "tonggle">I have an account</div>
+		<div class = "submit">OK</div>
+	</div>
+
+<script>
+	var signupform = document.getElementById("signupform");
+	var loginform = document.getElementById("loginform");
+	signupform.style.display = "none";
+
+	$(".tonggle").click(function(){
+		Session.set('errorMessage',"");
+    	if(signupform.style.display == "none"){ 
+    		//status is login
+    		loginform.style.display = "none";
+			signupform.style.display = "block";
+    		
+    	}else{ 
+    		//status is signup
+    		signupform.style.display = "none";
+    		loginform.style.display = "block";
+    	}
+	});
+	
+</script>
+
+</template>
