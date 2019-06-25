@@ -11,6 +11,7 @@ import '../../ui/Login.js';
 import '../../ui/ControlPanel.js';
 import '../../ui/RoleSelection.js';
 import '../../ui/Ready.js';
+import '../../ui/Menu.js';
 
 import '../../ui/css/layout.css';
 

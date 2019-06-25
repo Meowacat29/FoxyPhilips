@@ -40,11 +40,11 @@ body {
  /*===================GAME layout==================*/
 
 .hidden{
-	visibility: hidden;
+	visibility: hidden !important;
 }
 
 .shown{
-	visibility: visible;
+	visibility: visible !important;;
 	-webkit-animation: fade_in 0.5s;
 	animation: fade_in 0.5s；
 }
@@ -202,7 +202,7 @@ body {
 	animation: pop_text_a 0.6s；
 }
 
-.losePopup{
+.losePopup1{
 	position: absolute;
 	left: 0%; 
 	top: 30%;
@@ -216,7 +216,7 @@ body {
 }
 
 
-.losePopup > .lose_text{
+.losePopup1 > .lose_text{
 	font-family: 'arcadeclassic';
 	position: absolute;
 	left: 35%;
@@ -227,6 +227,30 @@ body {
 	animation: pop_text_a 0.6s；
 }
 
+.losePopup2{
+	position: absolute;
+	left: 0%; 
+	top: 40%;
+	height: 30px; 
+	width:100%;
+	background: url('images/lose_popup.png');
+	background-size: 100% 30px;
+	background-repeat: no-repeat;
+	-webkit-animation: pop_b 0.6s;
+	animation: pop_b 0.6s；
+}
+
+
+.losePopup2 > #penalty_text{
+	font-family: 'arcadeclassic';
+	position: absolute;
+	left: 35%;
+	top: 5px;
+	font-size: 20px;
+	text-align: center;	
+	-webkit-animation: pop_text_b 0.9s;
+	animation: pop_text_b 0.9s；
+}
 
 .menu_button{
 	font-family: 'arcadeclassic';
@@ -279,10 +303,10 @@ body {
 }
 
 #board_cheat{
+	visibility: hidden;
 	position: absolute;
 	left: 40px;
 	top: 0px;
-	display: none;
 	width:30px;
 	height:50px;
 	background: url('images/skills/icon_cheat.png');
@@ -302,10 +326,10 @@ body {
 }
 
 #board_powerMax{
+	visibility: hidden;
 	position: absolute;
 	left: 80px;
 	top: 0px;
-	display: none;
 	width:30px;
 	height:50px;
 	background: url('images/skills/icon_powerMax.png');
@@ -342,7 +366,7 @@ body {
 
 .skill_name{
 	position: absolute;
-	top: 15px;
+	top: 10px;
 	right: 50px;
 	width: 120px;
 	font-size: 18px;
@@ -403,7 +427,7 @@ body {
 	background-size:65px 45px;
 }
 
-.AOE{
+.SUPER-SWITCH{
 	width:65px;
 	height:45px;
 	background: url('images/skills/landmine_seat.png');
@@ -473,7 +497,7 @@ body {
 	width: 100%;
 	text-align: center;
 	-webkit-animation: attack 1s;
-	animation: attack 1s；
+	animation: attack 1s;
 }
 
 @-webkit-keyframes attack {
@@ -751,14 +775,65 @@ body {
 	top: -20px;
 }
 
-#test {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-/*  border: 5px solid red;*/
-  z-index: 1;
-	/*tilt code*/
-     -webkit-transform: perspective(500px) rotateX(50deg) !important;
+#battle_warning{
+	display: none;
+	position: absolute;
+	top: 15%;
+	left: 0%;
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+}
+
+#battle_result{
+	display: none;
+	position: absolute;
+	top: 15%;
+	left: 0%;
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+}
+
+#switch_warning{
+	display: none;
+	position: absolute;
+	top: 20%;
+	left: 0%;
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+}
+
+#switch_result_passive{
+	display: none;
+	position: absolute;
+	top: 20%;
+	left: 0%;
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+}
+
+
+#switch_confirmation{
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 0%;
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+}
+
+#switch_result_active{
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 0%;
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
 }
 
 .notePopup1{
@@ -1062,6 +1137,34 @@ body {
 
 
 /*===================MENU==================*/
+
+#page_flipper1{
+	position: absolute;
+	bottom: 18%;
+	left: 47%;
+	width: 20px;
+	height: 40px;
+	background: url('images/next.png');
+	background-size: 20px auto;
+	background-repeat: no-repeat;
+	text-align: center;
+}
+#page_flipper2{
+	position: absolute;
+	bottom: 18%;
+	left: 47%;
+	width: 20px;
+	height: 40px;
+	background: url('images/next.png');
+	background-size: 20px auto;
+	background-repeat: no-repeat;
+	transform: rotate(180deg);
+}
+
+#part2{
+	visibility: hidden;
+}
+
 .menu{
 	position: absolute;
 	top: 0px;
@@ -1102,68 +1205,60 @@ body {
 	transform: translateY(4px);
 }
 
-#level2_menu_instruction{
-	position: absolute;
-	width: 90%;
-	height: 92%;
-	top: 3%;
-	left: 10%;
-	font-size: 20px;
-	/*border: red solid 1px;*/
-}
-
 #p1_text{
 	position: absolute;
-	top: 0%;
+	width: 85%;
+	top: 10%;
+	left: 10%;
+	font-size: 23px;
 }
 
 #p1_roles_diagram_container{
 	position: absolute;
-	top: 10%;
-	left: 30px;
+	top: 30%;
+	left: 10%;
 	width: 270px;
 	height: 230px;
 }
 
 #p2_text{
 	position: absolute;
-	top: 45%;
+	width: 85%;
+	top: 10%;
+	left: 10%;
+	font-size: 23px;
 }
 
 #p2_diagram{
 	position: absolute;
-	width: 100%;
-	top: 53%;
+	left: 8%;
+	width: 90%;
+	top: 25%;
 }
 
 #back{
 	position: absolute;
-	bottom: 0px;
+	bottom: 10%;
 	left: 35%;
+	text-align: center;
 	font-size: 35px;
-}
-
-#skill_icons{
-	position: absolute;
-	height: 250px;
-	top: 0px;
+	width: 30%;
 }
 
 .skill_icon{
-	margin-bottom: 5px;
+	margin-bottom: 8px;
 }
 
 #skill_intros{
 	font-size: 15px;
 	position: absolute;
-	height: 250px;
-	width: 80%;
-	left: 65px;
 	top: 0px;
+	left: 65px;
 }
+
 .skill_intro{
-	margin-top: 20px;
-	margin-bottom: 33px;
+	margin-top: 15px;
+	margin-bottom: 30px;
 }
 
 /*===================END==================*/

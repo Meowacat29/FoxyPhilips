@@ -6,23 +6,33 @@
 
 <div class = "board">
 	<div id = "board_attackMax"></div>
-	<div id = "board_cheat"></div><div id = "board_cheat_timer">{{cheat_timer}}</div>
-	<div id = "board_powerMax"></div><div id = "board_powerMax_timer">{{power_timer}}</div>
+
+	<div id = "board_cheat" ></div>
+		<div id = "board_cheat_timer" >{{cheat_timer}}</div>
+
+	<div id = "board_powerMax" class = {{power_status}}></div>
+		<div id = "board_powerMax_timer">{{power_timer}}</div>
 </div>
 
-<div class = "menu_button">MENU</div>
 
+
+<div class = "menu_button">MENU</div>
 <div class = "venture">TRY MY LUCK</div>
+
+<div id = battle_warning>YOU WERE ATTCKED!</div>
+<div id = battle_result></div>
+<div id = switch_warning>YOU WERE SUPER-SWITCHED!</div>
+<div id = switch_result_passive></div>
+<div id = switch_confirmation>SUPER-SWITCHING...</div>
+<div id = switch_result_active></div>
 
 <div id = "notePopup1"><div class = "noteContainer"><div id = "note1" class = "note"></div></div></div>
 <div id = "notePopup2"><div id = "note2" class = "note"></div></div>
-
 <div id = "winPopup1"><div class = "win_text">YOU WIN!</div></div>
 <div id = "winPopup2"><div id = "reward_text" class = "reward_text">{{reward}} COINS</div></div>
-
 <div id = "drawPopup"><div class = "draw_text">DRAW!</div></div>
-
-<div id = "losePopup"><div class = "lose_text">YOU LOSE!</div></div>
+<div id = "losePopup1"><div class = "lose_text">YOU LOSE!</div></div>
+<div id = "losePopup2"><div id = "penalty_text"></div></div>
 
 {{#if Template.subscriptionsReady}}
 
@@ -64,7 +74,7 @@
 			</div>
 			<div class='char detective'></div>
 			<div class='carpet'></div>
-			<div class='starContainer'>{{star 0}}</div>
+			<div id = 'starContainer0' class='starContainer'>{{star 0}}</div>
 		</div>
 		<div name=1 class="role {{isable 1}}">
 			<div class="{{curtain 1}}">
@@ -72,15 +82,7 @@
 			</div>
 			<div class='char gangster'></div>
 			<div class='carpet'></div>
-			<div class='starContainer'>{{star 1}}</div>
-		</div>
-		<div name=2 class="role {{isable 2}}">
-			<div class="{{curtain 2}}">
-				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
-			</div>
-			<div class='char farmer'></div>	
-			<div class='carpet'></div>
-			<div class='starContainer'>{{star 2}}</div>
+			<div id = 'starContainer1' class='starContainer'>{{star 1}}</div>
 		</div>
 		<div name=3 class="role {{isable 3}}">
 			<div class="{{curtain 3}}">
@@ -88,7 +90,15 @@
 			</div>
 			<div class='char geisha'></div>	
 			<div class='carpet'></div>
-			<div class='starContainer'>{{star 3}}</div>
+			<div id = 'starContainer3' class='starContainer'>{{star 3}}</div>
+		</div>
+		<div name=2 class="role {{isable 2}}">
+			<div class="{{curtain 2}}">
+				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
+			</div>
+			<div class='char farmer'></div>	
+			<div class='carpet'></div>
+			<div id = 'starContainer2' class='starContainer'>{{star 2}}</div>
 		</div>
 
 	</div>

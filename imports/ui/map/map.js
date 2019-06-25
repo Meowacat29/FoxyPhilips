@@ -1,7 +1,7 @@
 import './map.html';
-// import '../../api/players.js';
 import  {Players} from '../../api/players.js';
 import {CHARACTERS} from '../commons/commons.js';
+
 var latLng;
 var marker;
 
@@ -19,15 +19,10 @@ function set_map_ready(){
 }
 
 Template.map.onCreated(function() { 
-  //add a person with fake position in db
-  //Meteor.call('players.addFakePerson', {'lat': 677.972,'lng':478.250931824091});
-  //Meteor.call('players.addFakePerson', {'lat': 49.211,'lng':  -123.115});
-
   self=this;
   self.autorun(function() {
-      var profile = self.subscribe('profile',Meteor.userId()); //recover
+      var profile = self.subscribe('profile',Meteor.userId());
       if (profile.ready()) {
-        console.log("Map subscription ready for user id:"+Meteor.userId());
         var index = Players.findOne({owner: Meteor.userId()}).role;
         Session.set('curRoleIndex',index);
         if(marker)
@@ -35,10 +30,8 @@ Template.map.onCreated(function() {
       }
   });
 
-
   GoogleMaps.ready('map', function(map) {
     //set map status when map is ready
-    console.log("map is ready");
     set_map_ready();
 
     var intiaillatLng = Geolocation.latLng();
@@ -49,7 +42,6 @@ Template.map.onCreated(function() {
           position: intiaillatLng,
           map : map.instance
     });
-    //console.log("marker initial latlng is "+intiaillatLng);
 
     //update all players' location realtimely
     var watchID = navigator.geolocation.watchPosition(
@@ -59,42 +51,14 @@ Template.map.onCreated(function() {
     );
 
 
-        //simulating moving target
-        // //create moving target
-        // var lineSymbol = {
-        //   path: google.maps.SymbolPath.CIRCLE,
-        //   scale: 8,
-        //   strokeColor: '#393'
-        // };
-        // // Create the polyline and add the symbol to it via the 'icons' property.
-        // var line = new google.maps.Polyline({
-        //   path: [{lat: 22.291, lng: 153.027}, {lat: 18.291, lng: 153.027}],
-        //   icons: [{
-        //     icon: lineSymbol,
-        //     offset: '100%'
-        //   }],
-        //   map: map.instance
-        // });
-
-        // animateCircle(line);
-
-    //});
   });
-
-
-// var overlay = new MyOverlay(map);
-// var projection;
-//   google.maps.event.addListener(map, 'idle', function() {
-//    // Get projection
-//    projection = overlay.getProjection();
-// })
+     Meteor.call('players.countPlayers');
 
 });
 
 //update all players' location on map. onSuccess() is triggered when up-to-date geolocation data is received
 function onSuccess(position,map) {
-
-    console.log("geoposition successfully updated");
+    console.log("geoposition updated");
     let lng = position.coords.longitude;
     let lat = position.coords.latitude;
 
@@ -148,7 +112,6 @@ function onSuccess(position,map) {
         console.log(error.reason);
         return;
       }
-      console.log("targets count:"+targets.length);
       console.log("there are "+targets.length +" targets");
       // console.log(JSON.stringify(targets));
 
@@ -162,7 +125,6 @@ function onSuccess(position,map) {
         }
         if (!inrange){ //selected player walk off the range/circle
           turnOffAttackBtn();
-          console.log("---->selected player is not in range");
         }
       }
       else //to rpevent p2Id session value loss after refresh
@@ -170,7 +132,6 @@ function onSuccess(position,map) {
 
       //disply all visible players on map
       for(i=0;i<targets.length;i++){
-        //console.log("targets returns:"+JSON.stringify(targets[i]));
         if(!markers[i]){
           var level = targets[i].level;
           markers[i] = new google.maps.Marker({
@@ -188,7 +149,6 @@ function onSuccess(position,map) {
       markers.forEach(function(marker){
         google.maps.event.addListener(marker,'click',function() {
          if(marker){
-            //console.log("markers name in listener: " + marker.name);
             Session.set("p2Id", marker.name);//marker.name is _id
             //Meteor.call("players.setSelectedPlayerSession", marker.name); //pass playerid
             if(Session.get(marker.name) == 'locked'){

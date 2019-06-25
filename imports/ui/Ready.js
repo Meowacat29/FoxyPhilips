@@ -10,7 +10,6 @@ Template.Ready.onCreated(function(){
  	Tracker.autorun(() => {
 	  if(handle.ready()){
 	  	var p1Role = Players.findOne({owner: Meteor.userId()}).role;
-	  	console.log(p1Role);
 		var p1RoleLevel = Players.findOne({owner: Meteor.userId()}).characters[p1Role].level;
 		var p1RoleName = Players.findOne({owner: Meteor.userId()}).characters[p1Role].name;
 
@@ -25,7 +24,6 @@ Template.Ready.onCreated(function(){
 
 Template.Ready.helpers({
 	char_ready_index:()=>{
-		console.log("char_ready_" + Session.get("p1Role"));
 		return "char_ready_" + Session.get("p1Role");
 	},
 	char_name:()=>{

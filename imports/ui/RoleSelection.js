@@ -5,17 +5,13 @@ import {CHARACTERS} from './commons/commons.js';
 import {set_ptr_to_next_component} from './Story.js';
 
 Template.RoleSelection.onCreated(function(){
-  //Meteor.call('players.remove',Meteor.userId());
-  // console.log("remove any other players with this userId");
-  //console.log("before insert");
-  //Meteor.call('players.countPlayers');691.8688354492188 478.4449045835063
-  Meteor.call('players.clearData'); //clear all player records
+  //Meteor.call('players.countPlayers');
+  //Meteor.call('players.clearData'); //clear all player records
 
-  Meteor.call('players.addFakePerson', {'lat': 49.2118,'lng':  -123.1158});
-  Meteor.call('players.addFakePerson', {'lat': 49.211,'lng':  -123.115}); 
-  Meteor.call('players.addFakePerson', {'lat': 49.2676,'lng':  -123.2529}); 
-  Meteor.call('players.addFakePerson', {'lat': 49.2670,'lng':  -123.252});
-  //var handle = this.subscribe('profile',Meteor.userId());
+  //Meteor.call('players.addFakePerson', {'lat': 49.2118,'lng':  -123.1158});
+  // Meteor.call('players.addFakePerson', {'lat': 49.211,'lng':  -123.115}); 
+  //Meteor.call('players.addFakePerson', {'lat': 49.2676,'lng':  -123.2529}); 
+  //Meteor.call('players.addFakePerson', {'lat': 49.2670,'lng':  -123.252});
 
 });
 
@@ -29,7 +25,6 @@ Template.RoleSelection.events({
     }
     document.getElementById(id).classList.add("selected_box");
 
-    //
     var name = document.getElementsByClassName("selected_box")[0].getAttribute('name');
     Session.set("selected_role_prep", name);
 
@@ -44,10 +39,8 @@ Template.RoleSelection.events({
 
       set_ptr_to_next_component();
     }
-    //console.log("after insert player")
-    //Meteor.call('players.countPlayers');
 
   },
 
-})
+});
 

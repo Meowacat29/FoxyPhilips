@@ -9,7 +9,7 @@ import {SKILLS} from '../ui/commons/commons.js';
 export const Players = new Mongo.Collection('players');
 
 var ObjectId = require('mongodb').ObjectID;
-var MAX_LEVEL = CHARACTERS.length;
+var MAX_LEVEL = 4;
 
 if (Meteor.isServer) {
   	Meteor.publish('profile', function (userId) {
@@ -22,14 +22,9 @@ if (Meteor.isServer) {
 }
 
 
-if (Meteor.isClient) { //called when a page is loaded/ready. ex. when refresh a page
+if (Meteor.isClient) {
 
 }
-
-// if(Meteor.isClient){
-//     profile = Meteor.subscribe('profile',Meteor.userId());
-
-// }
 
 // role = new SimpleSchema({
 // 	name:{
@@ -68,10 +63,39 @@ if (Meteor.isClient) { //called when a page is loaded/ready. ex. when refresh a 
 // });
 
 Meteor.methods({
+  'players.notify_a_battle': function(userId, resultValue) {
+      Players.update(
+        { '_id': userId },
+        { $set: {'battle_notification': resultValue} }
+      ); 
+  },
+
+  'players.received_a_battle': function() {
+      Players.update(
+        { 'owner': Meteor.userId() },
+        { $set: {'battle_notification': null} }
+      ); 
+  },
+
+  'players.notify_a_switch': function(userId, role, newLevel) {
+      Players.update(
+        { '_id': userId },
+        { $set: {'switch_notification': role + newLevel} }
+      ); 
+  },
+
+  'players.received_a_switch': function() {
+      Players.update(
+        { 'owner': Meteor.userId() },
+        { $set: {'switch_notification': null} }
+      ); 
+  },
+
   'players.clearData'(){
     Players.rawCollection().drop();
   },
 
+//always update if a player already exists
   'players.insert'(index) {
     if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
@@ -80,7 +104,6 @@ Meteor.methods({
 	//remove if the player already exist
 	var profileIsExsist = Players.find({owner: Meteor.userId()});
 	if(profileIsExsist){
-    console.log("duplicate plaer");
 		Players.remove({owner: Meteor.userId()});
   }
 
@@ -94,7 +117,7 @@ Meteor.methods({
   		createdAt: new Date(),
   		username: Meteor.user().username.toUpperCase(),
   		level: 1,
-      goldCoin: 1000000,
+      goldCoin: 1000,
   	  characters: [
   	   	{name: CHARACTERS[0], level: (index == 0 ? 1:0)},
         {name: CHARACTERS[1], level: (index == 1 ? 1:0)},
@@ -108,15 +131,18 @@ Meteor.methods({
         {name: SKILLS[3]},
         {name: SKILLS[4]},
         {name: SKILLS[5]},
-        {name: SKILLS[0]},
-        {name: SKILLS[1]},
-        {name: SKILLS[2]},
+        {name: SKILLS[5]},
+        {name: SKILLS[5]},
+        {name: SKILLS[5]},
       ],
       cheat: {status: false, role: null},
       attackMax: true,
       hide: 0,
   	  role: index, //default index in CHARACTERS
   	  position: null,
+      battle_notification: null,
+      switch_notification: null,
+      tutorial_complete: false,
   	});
   },
 
@@ -126,7 +152,6 @@ Meteor.methods({
 
   //upgrade a character by 1 level; insert a new character if it doesn't exist
   'players.insertRole'(index){
-    console.log("INSERTION");
     //check if the character exists
     // if(Players.findOne({'owner':Meteor.userId()}).characters[index].level == 0){
     //   //inser a new character
@@ -136,7 +161,7 @@ Meteor.methods({
 
     //check if level is at maximum
     if(Players.findOne({'owner':Meteor.userId()}).characters[index].level == MAX_LEVEL){
-      console.log('WARNING: You can only have level up to', MAX_LEVEL);
+      console.log('WARNING: failed to upgrade character due to level limit', MAX_LEVEL);
       return false;
     }
 
@@ -149,12 +174,22 @@ Meteor.methods({
   },
 
   'players.switchRole'(index){
-	Players.update({'owner':Meteor.userId()}, {$set:{'role': index}});
+	 Players.update({'owner':Meteor.userId()}, {$set:{'role': index}});
+
+   //if cheat is applied, adjust cheat role as well
+    if (Players.findOne({'owner':Meteor.userId()}).cheat.status == true){
+      var fake_character = parseInt(index) + 2;
+      if(fake_character > (CHARACTERS.length-1))
+        fake_character -= CHARACTERS.length;
+
+      Players.update(
+        { 'owner': Meteor.userId() },
+        { $set: {"cheat.role" : fake_character} }
+      ); 
+    }
   },
 
   'players.updatePosition'(lat,lng){
-    //console.log("in matero call updatepostion:"+JSON.stringify(lat));
-
   	Players.update(
    		{ 'owner': Meteor.userId() },
    		{ $set:{'position': {"lat":lat, "lng": lng}}}
@@ -163,10 +198,8 @@ Meteor.methods({
 
   // add a fake person surrounds the user
   'players.addFakePerson'(latlng){
-    console.log("ADD a fake player");
-    console.log("fake person position:"+JSON.stringify(latlng));
   	if(!latlng){
-  		console.log("Error: invalid fake player position");
+  		console.log("warning: invalid fake player position");
   		return;
   	}
   	r_earth = 6378*1000;
@@ -180,31 +213,31 @@ Meteor.methods({
   		owner: "fakeUserID", 
   		createdAt: new Date(),
   		username: "fakeUsername",
-  		level: 2,
-      goldCoin:100000,
+  		level: 5,
+      goldCoin:1000,
   	  characters: [
-        {name: CHARACTERS[0], level: 0},
-        {name: CHARACTERS[1], level: 2},
+        {name: CHARACTERS[0], level: 2},
+        {name: CHARACTERS[1], level: 0},
         {name: CHARACTERS[2], level: 0},
-        {name: CHARACTERS[3], level: 0}
+        {name: CHARACTERS[3], level: 3}
   	   ],
       skills:[],
-  	 	role: 1, //default index in CHARACTERS
-     	position: {"lat":new_latitude, "lng":new_longitude}
+      cheat: {status: false, role: null},
+      attackMax: true,
+      hide: 0,
+      role: 3, //default index in CHARACTERS
+      position: {"lat":new_latitude, "lng":new_longitude},
+      battle_notification: null,
 	  });
 
-    console.log("Fake person is added");
+    console.log("Fake player is added");
   },
 
 // get all tagets surronds the user (in a circular area with radius of 500 meter)
 // returns a list of _id and position
   'players.getTargetsinView'(){
-    // console.log("check")
-    // Meteor.call('players.countPlayers');
-
   	userPos = Players.findOne({'owner': Meteor.userId()}).position;
-  	//console.log("user position is "+ userPos);
-    console.log("user position is"+JSON.stringify(Players.find({}).fetch()));
+    //console.log("player position is"+JSON.stringify(Players.find({}).fetch()));
   	dx=500;
   	dy=500;
   	r_earth = 6378*1000;
@@ -219,29 +252,6 @@ Meteor.methods({
   	// console.log("lngUpperBound"+ lngUpperBound);
   	// console.log("lngLowerBound"+ lngLowerBound);
 
-  //   console.log("++++++")
-  // 	console.log(JSON.stringify(
-		// Players.find(
-  // 			{}
-  // 		).fetch()));
-
-     // var results=Players.find(
-     //    {'owner': {$ne: this.userId},'position.lat':{ $gt: latLowerBound, $lt: latUpperBound }, 'position.lng':{ $gt: lngLowerBound, $lt: lngUpperBound }},
-     //    {position: 1}
-     //  ).fetch();
-     // for(i=0;i<results.length;i++){
-     //  console.log("show getTargetsinView results: "+JSON.stringify(results[i]));
-     // }
-
-  // 	console.log("targets: "+JSON.stringify(
-	 // Players.find(
-  // 			{'position.lat':{ $gt: latLowerBound, $lt: latUpperBound }, 'position.lng':{ $gt: lngLowerBound, $lt: lngUpperBound }},
-  // 			{position: 1}
-  // 		).fetch()));
-    //console.log("---find all documents in getTargetsinView: "+ Players.find({}).fetch().length);
-
-
-
   	return Players.find(
   		  {'owner': {$ne: Meteor.userId()},'position.lat':{ $gt: latLowerBound, $lt: latUpperBound }, 'position.lng':{ $gt: lngLowerBound, $lt: lngUpperBound }},
   		  {position: 1}
@@ -250,27 +260,17 @@ Meteor.methods({
 
 
   'players.countPlayers'(){
-
-      //console.log(JSON.stringify(Players.findOne({})));
-
-    console.log("CALL: all documents: " + Players.find({}).fetch().length);
-    //console.log(Players.find({}).fetch());
-    console.log(JSON.stringify(Players.find({}).fetch()));
-    //if(Players.findOne({}).username){
-      //Session.set("selectedPlayerName", "Players.findOne({}).username");
-    //}
-    //selectedPlayerLevel = Players.findOne({owner: playerId}).level;
-    //Session.set("selectedPlayerUsername", );
-    //Session.set("selectedPlayerLevel", selectedPlayerLevel);
+    console.log("Count all documents: " + Players.find({}).fetch().length);
+    //console.log(JSON.stringify(Players.find({}).fetch()));
   },
 
   //add a new skill to player's skill list
-  //Sindex: index of character in CHARACTER array.
+  //Sindex: index of skill in SKILL array.
   'players.addSkill'(sindex){
     console.log("add skill!");
     var skillsSize = Players.findOne({'owner':Meteor.userId()}).skills.length;
     if(skillsSize==9){
-      console.log("you can only have up to 9 skills");
+      console.log("Warning: failed to add skill due to limit");
       return false;
     }
     Players.update({'owner':Meteor.userId()}, { $push: { skills: {name: SKILLS[sindex]} } } );
@@ -278,8 +278,6 @@ Meteor.methods({
   },
 
   'players.getp1Role'(){
-    console.log("getp1role!");
-    console.log("in meteor cal fn: p1role is "+Players.findOne({'owner':Meteor.userId()}).role);
     return Players.findOne({'owner':Meteor.userId()}).role;
   },
 
@@ -299,26 +297,37 @@ Meteor.methods({
       { $pull : {"skills" : null }});
   },
 
-  'players.power_to_max'(){
-    selectedRoleIndex = Players.findOne({'owner':Meteor.userId()}).role;
-    selectedRoleLevel = Players.findOne({'owner':Meteor.userId()}).characters[selectedRoleIndex].level;
+  'players.power_to_max'(rIndex){
+    var selectedRoleLevel = Players.findOne({'owner':Meteor.userId()}).characters[rIndex].level;
 
     //set ths level of current role to max_level
     Players.update(
         { 'owner': Meteor.userId() },
-        { $set: { ['characters.'+ selectedRoleIndex + '.level' ]: MAX_LEVEL } }
+        { $set: { ['characters.'+ rIndex + '.level' ]: MAX_LEVEL } }
+      );
+
+    //set the real level
+    Players.update(
+        { 'owner': Meteor.userId() },
+        { $set: { ['characters.'+ rIndex + '.real_level' ]: selectedRoleLevel } }
       );
     },
 
-    'players.power_recover'(){
+    'players.power_recover'(rIndex){
+      var real_level = Players.findOne({'owner':Meteor.userId()}).characters[rIndex].real_level;
+
       Players.update(
         { 'owner': Meteor.userId() },
-        { $set: { ['characters.'+ selectedRoleIndex + '.level' ]: selectedRoleLevel } }
+        { $set: { ['characters.'+ rIndex + '.level' ]: real_level } }
+      );
+
+      Players.update(
+        { 'owner': Meteor.userId() },
+        { $set: { ['characters.'+ rIndex + '.real_level' ]: null } }
       );
     },
 
     'players.addCoins'(owner, reward){
-      //todo
       Players.update(
         { 'owner': owner },
         { $inc:{'goldCoin': reward}}
@@ -340,7 +349,6 @@ Meteor.methods({
     //check if all roles are at maximum level
     'players.allRolesAtMaximum'(){
       for(i = 0; i<CHARACTERS.length;i++){
-        console.log("leves are:"+Players.findOne({'owner':Meteor.userId()}).characters[i].level);
         if(Players.findOne({'owner':Meteor.userId()}).characters[i].level < MAX_LEVEL)
           return false;
       }
@@ -365,7 +373,7 @@ Meteor.methods({
     'players.cheat'(){
       var character = Players.findOne({'owner': Meteor.userId()}).role;
       var fake_character = parseInt(character) + 2;
-      if(fake_character >= (CHARACTERS.length-1)){
+      if(fake_character > (CHARACTERS.length-1)){
         fake_character -= CHARACTERS.length;
       }
 
@@ -376,7 +384,7 @@ Meteor.methods({
 
       Players.update(
         { 'owner': Meteor.userId() },
-        { $set: {"cheat.character" : fake_character} }
+        { $set: {"cheat.role" : fake_character} }
       );     
     },
 
@@ -388,7 +396,7 @@ Meteor.methods({
 
       Players.update(
         { 'owner': Meteor.userId() },
-        { $set: {"cheat.character" : null} }
+        { $set: {"cheat.role" : null} }
       );  
 
     },
@@ -407,6 +415,56 @@ Meteor.methods({
       );
     },
 
+    'players.superSwitch'(p1owner, p2Id){
+      var p1roleIndex = Players.findOne({'owner': p1owner}).role;
+      var p1roleLevel =  Players.findOne({'owner': p1owner}).characters[p1roleIndex].level;
+
+      var p2roleIndex = Players.findOne({'_id': p2Id}).role;
+      var p2roleLevel =  Players.findOne({'_id': p2Id}).characters[p2roleIndex].level;
+
+      //swap the levels of the current role of each other
+      Players.update(
+        { 'owner': p1owner },
+        { $set: { ['characters.'+ p1roleIndex + '.level' ]: p2roleLevel } }
+      );
+
+      Players.update(
+        { '_id': p2Id },
+        { $set: { ['characters.'+ p2roleIndex + '.level' ]: p1roleLevel } }
+      );
+
+      //update level for the player
+      Meteor.call('players.updateLevel_owner', p1owner);
+
+      //update level for opponent
+      Meteor.call('players.updateLevel_id', p2Id);
+
+      //notify the victim
+      Meteor.call('players.notify_a_switch', p2Id, p2roleIndex, p1roleLevel);
+
+    },
+
+    'players.updateLevel_id'(userId){
+      var newLevel = 0;
+      for(var i = 0; i<CHARACTERS.length;i++){
+        newLevel += Players.findOne({'_id': userId}).characters[i].level;
+      }
+      Players.update(
+        { '_id': userId},
+        { $set: {'level': newLevel} }
+      );  
+    },
+
+    'players.updateLevel_owner'(owner){
+      var newLevel = 0;
+      for(var i = 0; i<CHARACTERS.length;i++){
+        newLevel += Players.findOne({'owner': owner}).characters[i].level;
+      }
+      Players.update(
+        { 'owner': owner},
+        { $set: {'level': newLevel} }
+      );  
+    },
 
 });
 

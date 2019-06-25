@@ -49,24 +49,7 @@ Template.GameLayout.helpers({
 	},
 });
 
-Template.GameLayout.events({
-	'click .resume': () => {
-		Session.set("menu_status", "hidden");
-		localStorage.setItem("menu_status", "hidden");
-	},
-	'click .instruction': () => {
-		document.getElementById("level1_menu").style.display = "none";
-		document.getElementById("level2_menu_instruction").style.display = "block";
-	},
-	'click .quit': () => {
-		//navigator.app.exitApp(); //cordova
-	},
-	'click #back':()=>{
-		document.getElementById("level1_menu").style.display = "block";
-		document.getElementById("level2_menu_instruction").style.display = "none";
-	}
 
-});
 
 
 

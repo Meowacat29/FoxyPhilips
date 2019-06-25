@@ -12,54 +12,7 @@
 	</div>
 
 	<div class = "menu {{menu_status}}">
-		<div id = "level1_menu">
-			<div class = resume>resume</div>
-			<div class = instruction>how to play</div>
-			<div class = quit>quit</div>
-		</div>
-		<div id = "level2_menu_instruction">
-
-			<div id = "p1_text">No.2 charaters counter each other. using the right character increases your chance of win!</div>
-
-			<div id = p1_roles_diagram_container>
-				<div class = "arrow_top"> </div>
-				<div class = "arrow_bottom"> </div>
-				<div class = "arrow_left"> </div>
-				<div class = "arrow_right"> </div>
-			</div>
-
-			<div id = p1_roles_diagram_container>
-				<div class = "role_prep" id = detective_prep> </div> 
-				<div class = "role_prep" id = gangster_prep> </div>
-				<div class = "role_prep" id = geisha_prep> </div>
-				<div class = "role_prep" id = farmer_prep> </div>
-			</div>
-
-
-			<div id = "p2_text">No.2 remember to use skills to help you make the decisions!</div>
-
-			<div id = "p2_diagram">
-				<div id = skill_icons>
-					<div class = "GODSEYE skill_icon"></div>
-					<div class = "GODSEYE-X skill_icon"></div>
-					<div class = "AOE skill_icon"></div> 
-					<div class = "POWER-MAX skill_icon"></div> 
-					<div class = "CHEAT skill_icon"></div> 
-				</div>
-
-				<div id = skill_intros>
-					<div class = 'skill_intro'>prune 1 identity of your opponent</div>
-					<div class = 'skill_intro'>prune 2 identities of your opponent</div>
-					<div class = 'skill_intro'>attack all players in your range</div>
-					<div class = 'skill_intro'>level up your current role to maximum</div>
-					<div class = 'skill_intro'>hide your real identities from others even by using skills</div>
-				</div>
-			</div>
-
-
-			<div id = "back">BACK</div>
-		</div>
-
+		{{>Menu}}
 	</div>
 
 </template>
