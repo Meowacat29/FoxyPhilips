@@ -5,7 +5,7 @@ Template.Login.events({
   "click .submit": function(event, template) {
   	event.preventDefault();
   	if(document.getElementById("signupform").style.display == "none"){
-  		//in login
+  		//at login
   		Meteor.loginWithPassword(
       		template.find("#login-username").value,
       		template.find("#login-password").value,
@@ -19,7 +19,7 @@ Template.Login.events({
     	);
   	}
     else if (document.getElementById("loginform").style.display == "none"){
-  		//in signup form
+  		//at signup
 	    if(template.find("#signup-password").value){
         Accounts.createUser({
               username: template.find("#signup-username").value,

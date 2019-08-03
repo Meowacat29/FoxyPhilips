@@ -26,41 +26,6 @@ if (Meteor.isClient) {
 
 }
 
-// role = new SimpleSchema({
-// 	name:{
-// 		type: String,
-// 		"default": null
-// 	},
-// 	level:{
-// 		type: Number,
-// 		"default": null
-// 	},
-// 	isAble:{
-// 		type: Boolean,
-// 		"default": false
-// 	}
-// });
-
-// Players.schema = new SimpleSchema({
-// 	owner: {
-// 		type: String
-// 	},
-// 	createAt:{
-// 		type: Date
-// 	},
-// 	username: {
-// 		type: String
-// 	},
-// 	level:{
-// 		type: Number
-// 	},
-// 	// characters:{
-// 	// 	type: [role]
-// 	// },
-// 	role:{
-// 		type: String
-// 	}
-// });
 
 Meteor.methods({
   'players.notify_a_battle': function(userId, resultValue) {
@@ -107,11 +72,6 @@ Meteor.methods({
 		Players.remove({owner: Meteor.userId()});
   }
 
-	// if(selectedRole !== CHARACTERS[0] && selectedRole !== CHARACTERS[1] 
-	// 	&& selectedRole !== CHARACTERS[2] && selectedRole !== CHARACTERS.INVISIBLEMAN[3]){
-	// 	throw new Meteor.Error('this character does not exsist');
-	// }
-
   	Players.insert({ 
   		owner: Meteor.userId(), 
   		createdAt: new Date(),
@@ -131,9 +91,6 @@ Meteor.methods({
         {name: SKILLS[3]},
         {name: SKILLS[4]},
         {name: SKILLS[5]},
-        {name: SKILLS[5]},
-        {name: SKILLS[5]},
-        {name: SKILLS[5]},
       ],
       cheat: {status: false, role: null},
       attackMax: true,
@@ -150,15 +107,8 @@ Meteor.methods({
     Players.remove({'owner':userId});
   },
 
-  //upgrade a character by 1 level; insert a new character if it doesn't exist
+  //upgrade a character by 1 level; 
   'players.insertRole'(index){
-    //check if the character exists
-    // if(Players.findOne({'owner':Meteor.userId()}).characters[index].level == 0){
-    //   //inser a new character
-    //   Players.update({'owner':Meteor.userId()}, { $set: {['characters.'+ index + '.level' ]: 1} } );
-    //   return true;
-    // }
-
     //check if level is at maximum
     if(Players.findOne({'owner':Meteor.userId()}).characters[index].level == MAX_LEVEL){
       console.log('WARNING: failed to upgrade character due to level limit', MAX_LEVEL);
@@ -238,8 +188,8 @@ Meteor.methods({
   'players.getTargetsinView'(){
   	userPos = Players.findOne({'owner': Meteor.userId()}).position;
     //console.log("player position is"+JSON.stringify(Players.find({}).fetch()));
-  	dx=500;
-  	dy=500;
+  	dx=400;
+  	dy=400;
   	r_earth = 6378*1000;
 
   	latUpperBound  = userPos.lat  + ( dy / r_earth) * (180 / Math.PI);

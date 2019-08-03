@@ -18,7 +18,6 @@ export function set_ptr_to_next_component(next_index){
       if(curr == COMPONENTS.length){
       	FlowRouter.go('/main');
       }
-      //console.log("current page index:"+localStorage.getItem('index'));
 }
 
 Template.Story.onCreated(function(){

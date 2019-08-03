@@ -20,7 +20,7 @@ body {
 	top: -32%;
 	left: -30%;
   	width: 155%;
-  	height: 105vh;
+  	height: 106vh;
 	/*tilt code*/
      -webkit-transform: perspective(500px) rotateX(50deg) !important;
      transform: perspective(500px) rotateX(50deg) !important;

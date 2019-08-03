@@ -58,7 +58,7 @@ Template.map.onCreated(function() {
 
 //update all players' location on map. onSuccess() is triggered when up-to-date geolocation data is received
 function onSuccess(position,map) {
-    console.log("geoposition updated");
+    //console.log("geoposition updated");
     let lng = position.coords.longitude;
     let lat = position.coords.latitude;
 
@@ -78,42 +78,13 @@ function onSuccess(position,map) {
    });
     circle.bindTo('center', marker, 'position');
 
-//=======================last try
-  // var topRight = map.instance.getProjection().fromLatLngToPoint(map.instance.getBounds().getNorthEast());
-  // var bottomLeft = map.instance.getProjection().fromLatLngToPoint(map.instance.getBounds().getSouthWest());
-  // var scale = Math.pow(2, map.instance.getZoom());
-  // var worldPoint = map.instance.getProjection().fromLatLngToPoint(latLng);
-  // var x = (worldPoint.x - bottomLeft.x) * scale;
-  // var y = (worldPoint.y - topRight.y) * scale;
-  // console.log(x +" "+ y);
-
-  // var element = document.getElementById("test");
-  // element.style.left = x + "px";
-  // element.style.top = y + "px";
-
-  // google.maps.event.addListener(map.instance,'idle', function () {
-  //   //=============================================
-  //   var projection = map.instance.getProjection();
-  //   var markerLocation = marker.getPosition();
-  //   var screenPosition = projection.fromLatLngToPoint(markerLocation);
-  //   console.log("=============");
-  //   console.log(screenPosition);
-
-  // var element = document.getElementById("test");
-  // element.style.left = screenPosition.x + "px";
-  // element.style.top = screenPosition.y + "px";
-  // //=============================================
-
-  // });
-
-
     Meteor.call('players.getTargetsinView', function(error, targets){
       if(error){
         console.log(error.reason);
         return;
       }
-      console.log("there are "+targets.length +" targets");
-      // console.log(JSON.stringify(targets));
+      //console.log(targets.length +" targets");
+      //console.log(JSON.stringify(targets));
 
       //check if a currently selected player (if any) is within a attackable range/circle
       selectedPlayerId = Session.get("p2Id");

@@ -9,7 +9,7 @@ Template.RoleSelection.onCreated(function(){
   //Meteor.call('players.clearData'); //clear all player records
 
   //Meteor.call('players.addFakePerson', {'lat': 49.2118,'lng':  -123.1158});
-  // Meteor.call('players.addFakePerson', {'lat': 49.211,'lng':  -123.115}); 
+  //Meteor.call('players.addFakePerson', {'lat': 49.211,'lng':  -123.117}); 
   //Meteor.call('players.addFakePerson', {'lat': 49.2676,'lng':  -123.2529}); 
   //Meteor.call('players.addFakePerson', {'lat': 49.2670,'lng':  -123.252});
 
