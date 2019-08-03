@@ -52,7 +52,7 @@ Template.map.onCreated(function() {
 
 
   });
-     Meteor.call('players.countPlayers');
+     //Meteor.call('players.countPlayers');
 
 });
 

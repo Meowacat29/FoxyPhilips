@@ -179,8 +179,7 @@ Meteor.methods({
       position: {"lat":new_latitude, "lng":new_longitude},
       battle_notification: null,
 	  });
-
-    console.log("Fake player is added");
+    //console.log("Fake player is added");
   },
 
 // get all tagets surronds the user (in a circular area with radius of 500 meter)
@@ -210,14 +209,13 @@ Meteor.methods({
 
 
   'players.countPlayers'(){
-    console.log("Count all documents: " + Players.find({}).fetch().length);
+    //console.log("Count all documents: " + Players.find({}).fetch().length);
     //console.log(JSON.stringify(Players.find({}).fetch()));
   },
 
   //add a new skill to player's skill list
   //Sindex: index of skill in SKILL array.
   'players.addSkill'(sindex){
-    console.log("add skill!");
     var skillsSize = Players.findOne({'owner':Meteor.userId()}).skills.length;
     if(skillsSize==9){
       console.log("Warning: failed to add skill due to limit");

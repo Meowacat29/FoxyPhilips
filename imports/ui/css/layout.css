@@ -82,7 +82,7 @@ body {
 	height: 250px;
 	width: 100%;
 	left: 0%;
-	background: url('images/background4.png');
+	background: url('images/panel.png');
 	background-size: 100% 250px;
 	background-repeat: no-repeat;
 }
@@ -607,7 +607,7 @@ body {
 	display: inline-block;
 	height: 15px;
 	width: 15px;
-	background: url('images/star4.png');
+	background: url('images/star.png');
 	background-size: 15px 15px;
 	z-index: 11;
 	margin:-1px;
