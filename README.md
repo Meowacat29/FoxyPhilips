@@ -1,10 +1,9 @@
 # FoxyPhilips
 
-FocyPhilips is a multi-player mobile video game that utilizes Google maps API to provide a 2.5D surrounding experience.
-The game strategy is that the players switch between identities and utilize a variety of skills to have a real-time battle with each other.
+FoxyPhilips is a multi-player mobile video game in which the players switch between identities and utilize a variety of skills to have a real-time battle with each other. Google maps API is utilized to provide the 2.5d surround with real-time geolocation.
 
 <p align="center">
-  <img src="https://github.com/Meowacat29/FoxyPhilips/blob/master/demo/screenshoots.jpg"/>
+  <img src="https://github.com/Meowacat29/FoxyPhilips/blob/master/demo/screenshoots.jpeg"/>
 </p>
 
 ## Notice
