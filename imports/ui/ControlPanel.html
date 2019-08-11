@@ -4,14 +4,17 @@
 
 <div class = "sky"></div>
 
-<div class = "board">
-	<div id = "board_attackMax"></div>
+<div class = "bar">
+	<div id = "bar_attackMax"></div>
 
-	<div id = "board_cheat" ></div>
-		<div id = "board_cheat_timer" >{{cheat_timer}}</div>
-
-	<div id = "board_powerMax" class = {{power_status}}></div>
-		<div id = "board_powerMax_timer">{{power_timer}}</div>
+	<div id = "bar_cheat" >
+		<div id = "bar_cheat_timer" >{{cheat_timer}}</div>
+	</div>
+		
+	<div id = "bar_powerMax" class = {{power_status}}>
+		<div id = "bar_powerMax_timer">{{power_timer}}</div>
+	</div>
+		
 </div>
 
 
@@ -50,24 +53,37 @@
 </table>
 
 <div class="controlPanel">
-	<div class="rotateTargetContainer"><div class="animated bounceInDown"><p class="targetBtn unready"></p></div></div>
+	<div class="rotateTargetContainer"><div class="animated bounceInDown"><p class="targetBtn {{targetBtn_status}}"></p></div></div>
 	<div id = 'attack_text'>ATTACK!</div>
 	<div class = skill_name>{{skillName}}</div>
 	<div class="skills">
 		<div class="skill"><div id =0 class=" {{skill 0}} base"></div></div>
 		<div class="skill"><div id =1 class=" {{skill 1}} base"></div></div>
 		<div class="skill"><div id =2 class=" {{skill 2}} base"></div></div>
+		<div class="dummy_space2"></div>
+		<div class="dummy_space2"></div>
+		<div class="dummy_space2"></div>
 		<div class="skill"><div id =3 class=" {{skill 3}} base"></div></div>
+		<div class="dummy_space2"></div>
 		<div class="skill"><div id =4 class=" {{skill 4}} base"></div></div>
+		<div class="dummy_space2"></div>
 		<div class="skill"><div id =5 class=" {{skill 5}} base"></div></div>
+		<div class="dummy_space2"></div>
+		<div class="dummy_space2"></div>
 		<div class="skill"><div id =6 class=" {{skill 6}} base"></div></div>
+		<div class="dummy_space2"></div>
+		<div class="dummy_space2"></div>
 		<div class="skill"><div id =7 class=" {{skill 7}} base"></div></div>
+		<div class="dummy_space2"></div>
+		<div class="dummy_space2"></div>
 		<div class="skill"><div id =8 class=" {{skill 8}} base"></div></div>
 	</div>
 
 	<div class="skillsApply"><div class={{skillBtn_state}}></div></div>
 
 	<div class="rolesContainer">
+		<div class="dummy_space1"></div>
+		<div class="dummy_space1"></div>
 		<div name=0 class="role {{isable 0}}">
 			<div class="{{curtain 0}}">
 				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
@@ -92,6 +108,7 @@
 			<div class='carpet'></div>
 			<div id = 'starContainer3' class='starContainer'>{{star 3}}</div>
 		</div>
+		<div class="dummy_space1"></div>
 		<div name=2 class="role {{isable 2}}">
 			<div class="{{curtain 2}}">
 				<div class='curtain_left'></div><div class='curtain_right'></div><div class='curtain_top'></div>
@@ -100,6 +117,7 @@
 			<div class='carpet'></div>
 			<div id = 'starContainer2' class='starContainer'>{{star 2}}</div>
 		</div>
+		<div class="dummy_space1"></div>
 
 	</div>
 

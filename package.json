@@ -13,7 +13,7 @@
     "meteor-node-stubs": "^0.4.1",
     "mongodb": "^3.1.1",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": ">=16.4.2"
   },
   "meteor": {
     "mainModule": {
@@ -23,6 +23,12 @@
     "testModule": "tests/main.js"
   },
   "engines": {
-    "node": "6.17.1"
+    "node": "10.16.2"
+  },
+  "scripts": {
+    "cleanup": "rm -rf ../bundle/",
+    "dist": "npm run cleanup && meteor build ../ --directory --architecture os.linux.x86_64 --server-only",
+    "predeploy": "npm run dist && cp app.yaml ../bundle/ && cp Dockerfile ../bundle/",
+    "deploy": "npm run predeploy && (cd ../bundle && gcloud app deploy -q)"
   }
 }

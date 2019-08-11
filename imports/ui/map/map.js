@@ -1,6 +1,7 @@
 import './map.html';
 import  {Players} from '../../api/players.js';
 import {CHARACTERS} from '../commons/commons.js';
+import * as constants from '../commons/commons.js';
 
 var latLng;
 var marker;
@@ -11,23 +12,37 @@ var markers=[];
 
 var arcadeclassic = new FontFace('arcadeclassic', 'url(/fonts/ARCADECLASSIC.ttf)');
 
+function vh(v) {
+  var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  return (v * h) / 100;
+}
+
+function vw(v) {
+  var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  return (v * w) / 100;
+}
+
+function get_proportional_h(w){
+  return w / 100 * 330;
+}
+
 function set_map_ready(){
-    localStorage.setItem('map_status','shown');
-    Session.set('map_status','shown');
-    localStorage.setItem('loading_status','hidden');
-    Session.set('loading_status','hidden');
+  localStorage.setItem('map_status','shown');
+  Session.set('map_status','shown');
+  localStorage.setItem('loading_status','hidden');
+  Session.set('loading_status','hidden');
 }
 
 Template.map.onCreated(function() { 
   self=this;
   self.autorun(function() {
-      var profile = self.subscribe('profile',Meteor.userId());
-      if (profile.ready()) {
-        var index = Players.findOne({owner: Meteor.userId()}).role;
-        Session.set('curRoleIndex',index);
-        if(marker)
-          marker.setIcon({url: '/images/char/'+CHARACTERS[index]+'.png', scaledSize : new google.maps.Size(30, 95)});
-      }
+    var profile = self.subscribe('profile',Meteor.userId());
+    if (profile.ready()) {
+      var index = Players.findOne({owner: Meteor.userId()}).role;
+      Session.set('curRoleIndex',index);
+      if(marker)
+        marker.setIcon({url: '/images/char/'+CHARACTERS[index]+'.png', scaledSize : new google.maps.Size(vw(10),get_proportional_h(vw(10)))});
+    }
   });
 
   GoogleMaps.ready('map', function(map) {
@@ -38,23 +53,23 @@ Template.map.onCreated(function() {
     var index = Session.get('curRoleIndex');
     //initilze player on map
     marker = new google.maps.Marker({
-          icon: {url: '/images/char/'+CHARACTERS[index]+'.png', scaledSize : new google.maps.Size(30, 95)}, //customized
+          icon: {url: '/images/char/'+CHARACTERS[index]+'.png', scaledSize : new google.maps.Size(vw(10),get_proportional_h(vw(10)))}, //customized
           position: intiaillatLng,
           map : map.instance
-    });
+        });
 
     //update all players' location realtimely
     var watchID = navigator.geolocation.watchPosition(
       function(position) {onSuccess(position, map);}, 
       onError, 
       { timeout: 30000 }
-    );
+      );
 
 
   });
      //Meteor.call('players.countPlayers');
 
-});
+   });
 
 //update all players' location on map. onSuccess() is triggered when up-to-date geolocation data is received
 function onSuccess(position,map) {
@@ -71,7 +86,7 @@ function onSuccess(position,map) {
     //create circle around player1
     var circle = new google.maps.Circle({
      map : map.instance,
-     radius: 400, 
+     radius: constants.FIRE_RANGE, 
      strokeColor: "#E0FFFF",
      fillOpacity: 0,
      strokeWeight: 1,
@@ -83,8 +98,8 @@ function onSuccess(position,map) {
         console.log(error.reason);
         return;
       }
-      //console.log(targets.length +" targets");
-      //console.log(JSON.stringify(targets));
+      // console.log(targets.length +" targets");
+      // console.log(JSON.stringify(targets));
 
       //check if a currently selected player (if any) is within a attackable range/circle
       selectedPlayerId = Session.get("p2Id");
@@ -95,11 +110,9 @@ function onSuccess(position,map) {
             inrange = true;
         }
         if (!inrange){ //selected player walk off the range/circle
-          turnOffAttackBtn();
+          Session.set(selectedPlayerId, "locked");
         }
       }
-      else //to rpevent p2Id session value loss after refresh
-        turnOffAttackBtn();
 
       //disply all visible players on map
       for(i=0;i<targets.length;i++){
@@ -108,33 +121,33 @@ function onSuccess(position,map) {
           markers[i] = new google.maps.Marker({
             position: new google.maps.LatLng(targets[i].position.lat, targets[i].position.lng),
             map: map.instance,
-            icon: {url: '/images/char/char.png', scaledSize : new google.maps.Size(20, 55)}, 
+            icon: {url: '/images/char/char.png', scaledSize : new google.maps.Size(vw(6),get_proportional_h(vw(5)))}, 
             name: targets[i]._id,
             label: {text: "lv"+level, color: "DarkGoldenRod ", fontSize: "15px", fontFamily:"arcadeclassic"},
           });
         }else{
-             markers[i].setPosition(new google.maps.LatLng(targets[i].position.lat, targets[i].position.lng));
-        }
-      }
-           
-      markers.forEach(function(marker){
-        google.maps.event.addListener(marker,'click',function() {
-         if(marker){
+         markers[i].setPosition(new google.maps.LatLng(targets[i].position.lat, targets[i].position.lng));
+       }
+     }
+     
+     markers.forEach(function(marker){
+      google.maps.event.addListener(marker,'click',function() {
+       if(marker){
             Session.set("p2Id", marker.name);//marker.name is _id
             //Meteor.call("players.setSelectedPlayerSession", marker.name); //pass playerid
-            if(Session.get(marker.name) == 'locked'){
-              turnOffAttackBtn(marker.name); 
-            }else{
-              turnOnAttackBtn(marker.name); 
-            }
+            // if(Session.get(marker.name) == 'locked'){
+            //   turnOffAttackBtn(marker.name); 
+            // }else{
+            //   turnOnAttackBtn(marker.name); 
+            // }
             //update the image of selected marker (could be slow when there are too many targets in view --TODO improve)
             markers.forEach(function(mm){
-              mm.setIcon({url: '/images/char/char.png', scaledSize : new google.maps.Size(20, 55)});
+              mm.setIcon({url: '/images/char/char.png', scaledSize : new google.maps.Size(vw(6),get_proportional_h(vw(5)))});
             });
-            marker.setIcon({url: '/images/char/char_selected.png', scaledSize : new google.maps.Size(20, 55)}); 
+            marker.setIcon({url: '/images/char/char_selected.png', scaledSize : new google.maps.Size(vw(6),get_proportional_h(vw(5)))}); 
           }
         });
-      });
+    });
 
       //clean the markers that no longer need
       if(targets.length < markers.length){
@@ -147,17 +160,17 @@ function onSuccess(position,map) {
   }
 
   makePlayerTransparent = function (userId){
-        markers.forEach(function(marker){
-          if(marker.name == userId)
-              marker.setOpacity(0.5);
-        });
+    markers.forEach(function(marker){
+      if(marker.name == userId)
+        marker.setOpacity(0.5);
+    });
   };
 
   makePlayerOpaque = function (userId){
-          markers.forEach(function(marker){
-          if(marker.name == userId)
-              marker.setOpacity(1.0);
-        });
+    markers.forEach(function(marker){
+      if(marker.name == userId)
+        marker.setOpacity(1.0);
+    });
   };
 
   function onError(error) {

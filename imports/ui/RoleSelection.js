@@ -6,12 +6,13 @@ import {set_ptr_to_next_component} from './Story.js';
 
 Template.RoleSelection.onCreated(function(){
   //Meteor.call('players.countPlayers');
-  //Meteor.call('players.clearData'); //clear all player records
+  Meteor.call('players.clearData'); //clear all player records
 
-  //Meteor.call('players.addFakePerson', {'lat': 49.2118,'lng':  -123.1158});
-  //Meteor.call('players.addFakePerson', {'lat': 49.211,'lng':  -123.117}); 
+  Meteor.call('players.addFakePerson', {'lat': 49.2118,'lng':  -123.1158});
+  Meteor.call('players.addFakePerson', {'lat': 49.211,'lng':  -123.117}); 
+
   //Meteor.call('players.addFakePerson', {'lat': 49.2676,'lng':  -123.2529}); 
-  //Meteor.call('players.addFakePerson', {'lat': 49.2670,'lng':  -123.252});
+  // Meteor.call('players.addFakePerson', {'lat': 49.2670,'lng':  -123.252});
 
 });
 

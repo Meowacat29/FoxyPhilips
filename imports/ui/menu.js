@@ -10,7 +10,7 @@ Template.GameLayout.events({
 		document.getElementById("level2_menu_instruction").style.display = "block";
 	},
 	'click .quit': () => {
-		//navigator.app.exitApp(); //TODO
+		navigator.app.exitApp(); //TODO
 	},
 	'click #back':()=>{
 		document.getElementById("level1_menu").style.display = "block";

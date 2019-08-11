@@ -70,6 +70,14 @@ Template.Welcome.events({
 	}
 });
 
+document.addEventListener("backbutton", onBackButtonDown, false);
+
+//diable back button
+function onBackButtonDown(event) {
+  event.preventDefault();
+  event.stopPropagation();  
+}
+
 
 
 

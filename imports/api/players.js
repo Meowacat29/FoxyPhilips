@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 import {CHARACTERS} from '../ui/commons/commons.js';
 //import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import {SKILLS} from '../ui/commons/commons.js';
-
+import * as constants from '../ui/commons/commons.js';
 
 export const Players = new Mongo.Collection('players');
 
@@ -18,6 +18,16 @@ if (Meteor.isServer) {
 
     Meteor.publish('selectedPlayer', function (playerId) {
       return Players.find({_id: playerId});
+  });
+
+  //set user status to offline when user leaves (close app from code or exit externally)
+  Meteor.users.find({ "status.online": true }).observe({
+    // added: function(id) {
+    // },
+
+    removed: function(id) {
+      Meteor.call('players.switchStatusOff', (id._id));
+    }
   });
 }
 
@@ -60,6 +70,20 @@ Meteor.methods({
     Players.rawCollection().drop();
   },
 
+  'players.switchStatusOff'(userId){
+      Players.update(
+        { 'owner': userId},
+        { $set: {"status" : "off"} }
+      ); 
+  },
+
+  'players.switchStatusOn'(userId){
+      Players.update(
+        { 'owner': userId},
+        { $set: {"status" : "on"} }
+      ); 
+  },
+
 //always update if a player already exists
   'players.insert'(index) {
     if (! Meteor.userId()) {
@@ -76,10 +100,11 @@ Meteor.methods({
   		owner: Meteor.userId(), 
   		createdAt: new Date(),
   		username: Meteor.user().username.toUpperCase(),
+      status: "off",
   		level: 1,
       goldCoin: 1000,
   	  characters: [
-  	   	{name: CHARACTERS[0], level: (index == 0 ? 1:0)},
+        {name: CHARACTERS[0], level: (index == 0 ? 1:0)},
         {name: CHARACTERS[1], level: (index == 1 ? 1:0)},
         {name: CHARACTERS[2], level: (index == 2 ? 1:0)},
         {name: CHARACTERS[3], level: (index == 3 ? 1:0)}
@@ -93,8 +118,7 @@ Meteor.methods({
         {name: SKILLS[5]},
       ],
       cheat: {status: false, role: null},
-      attackMax: true,
-      hide: 0,
+      //attackMax: true,
   	  role: index, //default index in CHARACTERS
   	  position: null,
       battle_notification: null,
@@ -146,7 +170,7 @@ Meteor.methods({
 	  );
   },
 
-  // add a fake person surrounds the user
+  // add a fake player
   'players.addFakePerson'(latlng){
   	if(!latlng){
   		console.log("warning: invalid fake player position");
@@ -158,11 +182,11 @@ Meteor.methods({
   	new_latitude  = latlng.lat  + (dy / r_earth) * (180 / Math.PI);
 	  new_longitude = latlng.lng + (dx / r_earth) * (180 / Math.PI) / Math.cos(latlng.lat * Math.PI/180);
 	 
-   //fakeLatlng = new google.maps.LatLng(new_latitude, new_longitude);
   	Players.insert({ 
   		owner: "fakeUserID", 
   		createdAt: new Date(),
   		username: "fakeUsername",
+      status: "on",
   		level: 5,
       goldCoin:1000,
   	  characters: [
@@ -179,7 +203,6 @@ Meteor.methods({
       position: {"lat":new_latitude, "lng":new_longitude},
       battle_notification: null,
 	  });
-    //console.log("Fake player is added");
   },
 
 // get all tagets surronds the user (in a circular area with radius of 500 meter)
@@ -187,8 +210,8 @@ Meteor.methods({
   'players.getTargetsinView'(){
   	userPos = Players.findOne({'owner': Meteor.userId()}).position;
     //console.log("player position is"+JSON.stringify(Players.find({}).fetch()));
-  	dx=400;
-  	dy=400;
+  	dx=constants.FIRE_RANGE;
+  	dy=constants.FIRE_RANGE;
   	r_earth = 6378*1000;
 
   	latUpperBound  = userPos.lat  + ( dy / r_earth) * (180 / Math.PI);
@@ -202,7 +225,10 @@ Meteor.methods({
   	// console.log("lngLowerBound"+ lngLowerBound);
 
   	return Players.find(
-  		  {'owner': {$ne: Meteor.userId()},'position.lat':{ $gt: latLowerBound, $lt: latUpperBound }, 'position.lng':{ $gt: lngLowerBound, $lt: lngUpperBound }},
+  		  {'owner': {$ne: Meteor.userId()},
+        'status': "on",
+        'position.lat':{ $gt: latLowerBound, $lt: latUpperBound },
+        'position.lng':{ $gt: lngLowerBound, $lt: lngUpperBound }},
   		  {position: 1}
   		).fetch();
   },
@@ -326,7 +352,7 @@ Meteor.methods({
       }
 
       Players.update(
-        { 'owner': Meteor.userId() },
+        { 'owner': Meteor.userId()},
         { $set: {"cheat.status": true} }
       );
 
@@ -356,12 +382,12 @@ Meteor.methods({
       );   
     },
 
-    'players.setAttackMax'(status){
-      Players.update(
-        { 'owner': Meteor.userId() },
-        { $set: {'attackMax': status} }
-      );
-    },
+    // 'players.setAttackMax'(status){
+    //   Players.update(
+    //     { 'owner': Meteor.userId() },
+    //     { $set: {'attackMax': status} }
+    //   );
+    // },
 
     'players.superSwitch'(p1owner, p2Id){
       var p1roleIndex = Players.findOne({'owner': p1owner}).role;
@@ -413,6 +439,12 @@ Meteor.methods({
         { $set: {'level': newLevel} }
       );  
     },
+
+    'players.checkPlayerExistence'(owner){
+      if(Players.find({owner: owner}) != null)
+        return true;
+      return false;
+    }
 
 });
 

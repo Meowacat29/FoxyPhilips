@@ -1,6 +1,7 @@
 import './GameLayout.html';
 
 Template.GameLayout.onCreated(function(){
+	Session.clear();
 	Session.set("map_status", "hidden");
 	Session.set("loading_status", "shown");
 	Session.set("menu_status", "hidden");
@@ -19,7 +20,13 @@ Template.GameLayout.helpers({
 		return Session.get("loading_status");		
 	},
 });
+document.addEventListener("backbutton", onBackButtonDown, false);
 
+//diable back button
+function onBackButtonDown(event) {
+  event.preventDefault();
+  event.stopPropagation();  
+}
 
 
 

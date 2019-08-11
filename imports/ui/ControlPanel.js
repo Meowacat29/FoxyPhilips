@@ -11,7 +11,7 @@ var p2RoleLevel;
 var p2Id;
 
 const MAX_ROLES = CHARACTERS.length;
-const ATTACKMAX_RATIO = 2;
+const ATTACKMAX_RATIO = 3;
 const ROLELEVEL_DIFF_RATE = 0.2;		//the rate weighted the impact of role difference on battale result
 
 const REWARD = 100;
@@ -35,54 +35,57 @@ Template.ControlPanel.onCreated(function(){
 	    	p1Role = Players.findOne({owner: Meteor.userId()}).role;
 	    	p1RoleLevel = Players.findOne({owner: Meteor.userId()}).characters[p1Role].level;
 	    	Session.set('p1Role', p1Role);
-			Session.set('p1RoleLevel', p1RoleLevel);
+	    	Session.set('p1RoleLevel', p1RoleLevel);
 
-			watch_battle_event();
+	    	watch_battle_event();
 
-			watch_switch_event();
+	    	watch_switch_event();
 	    }
 	});
+	Meteor.call('players.switchStatusOn', Meteor.userId());
 });
 
 function watch_battle_event(){
-			Session.set('battle_notification', Players.findOne({owner: Meteor.userId()}).battle_notification);
-			Session.watch('battle_notification', function(resultValue) {
-        		if(resultValue != null){
-        			Meteor.call('players.received_a_battle');
-        			Session.set('battle_notification', null);
+	Session.set('battle_notification', Players.findOne({owner: Meteor.userId()}).battle_notification);
+	Session.watch('battle_notification', function(resultValue) {
+		if(resultValue != null){
+			Meteor.call('players.received_a_battle');
+			Session.set('battle_notification', null);
 
-        			flash_blacknWhite(document.getElementById('battle_warning'), 2);
-        			show_battle_result(resultValue);
-        		}
-        	 });
+			flash_blacknWhite(document.getElementById('battle_warning'), 2);
+			show_battle_result(resultValue);
+		}
+	});
 }
 
 function watch_switch_event(){
-			Session.set('switch_notification', Players.findOne({owner: Meteor.userId()}).switch_notification);
-			Session.watch('switch_notification', function(role_and_level) {
-        		if(role_and_level != null){
-        			Meteor.call('players.received_a_switch');
-        			Session.set('switch_notification', null);
+	Session.set('switch_notification', Players.findOne({owner: Meteor.userId()}).switch_notification);
+	Session.watch('switch_notification', function(role_and_level) {
+		if(role_and_level != null){
+			Meteor.call('players.received_a_switch');
+			Session.set('switch_notification', null);
 
-        			var roleIndex = role_and_level.charAt(0);
-					var roleNewLevel = role_and_level.charAt(1);
-					flash_blacknWhite(document.getElementById('switch_warning'), 2);
-        			show_passive_switch_result(roleIndex, roleNewLevel);
-        			flash(document.getElementById('starContainer'+roleIndex), 6, 2000);
-        		}
-        	 });
+			var roleIndex = role_and_level.charAt(0);
+			var roleNewLevel = role_and_level.charAt(1);
+			flash_blacknWhite(document.getElementById('switch_warning'), 2);
+			show_passive_switch_result(roleIndex, roleNewLevel);
+			flash(document.getElementById('starContainer'+roleIndex), 6, 2000);
+		}
+	});
 }
 
 //make an html consistently tonggled between visible and invisible status.
 //time: (flash_count * 2) * interval
 function flash(f,flash_count,startFrom){
 	var interval = 300;
-	var count = flash_count * 2 + 1;
+	var count = flash_count * 2;
 
-	for(var i = 0; i < count; i++){
-	 	Meteor.setTimeout(()=>{
-			f.style.visibility = (f.style.visibility == 'visible' ? 'hidden':'visible');
-		}, i * interval + startFrom);	
+	for(var i = 0; i <= count; i++){
+		if(i == count){
+			Meteor.setTimeout(()=>{f.style.visibility = 'visible'; }, i * interval + startFrom);
+		}else{
+			Meteor.setTimeout(()=>{f.style.visibility = (f.style.visibility == 'visible' ? 'hidden':'visible');}, i * interval + startFrom);	
+		}
 	}
 }
 
@@ -95,7 +98,7 @@ function flash_blacknWhite(f, flash_count){
 
 	f.style.display = 'block';
 	for(var i = 0; i < count; i++){
-	 	Meteor.setTimeout(()=>{
+		Meteor.setTimeout(()=>{
 			f.style.color = (f.style.color == 'white' ? 'black':'white');
 		}, i * interval );
 	}
@@ -106,39 +109,39 @@ function flash_blacknWhite(f, flash_count){
 }
 
 function show_battle_result(resultValue){
-    setTimeout(()=>{
-	    if(resultValue == 0){
-	        text = 'DRAW!';
-	    }else if(resultValue > 0){
-	        text = 'YOU WON '+resultValue + ' COINS!';
-	    }else if(resultValue < 0){
-	        text = 'YOU LOST ' +(-1 *resultValue + ' COINS!');
-	    }
-	    document.getElementById('battle_result').innerHTML = text;
+	setTimeout(()=>{
+		if(resultValue == 0){
+			text = 'DRAW!';
+		}else if(resultValue > 0){
+			text = 'WON '+resultValue + ' COINS!';
+		}else if(resultValue < 0){
+			text = 'LOST ' +(-1 *resultValue + ' COINS!');
+		}
+		document.getElementById('battle_result').innerHTML = text;
 		document.getElementById('battle_result').style.display = 'block';
-    }, 2500);
+	}, 2500);
 
-    setTimeout(()=>{
-	    document.getElementById('battle_result').style.display = 'none';
-    }, 4500);
+	setTimeout(()=>{
+		document.getElementById('battle_result').style.display = 'none';
+	}, 4500);
 }
 
 //display resulted roleLevel from a switch event by showing text on screen
 function show_passive_switch_result(roleIndex, roleNewLevel){
-    setTimeout(()=>{
-	    document.getElementById('switch_result_passive').innerHTML = CHARACTERS[roleIndex] + " is now " + roleNewLevel + " stars";
+	setTimeout(()=>{
+		document.getElementById('switch_result_passive').innerHTML = CHARACTERS[roleIndex] + " is now " + roleNewLevel + " stars";
 		document.getElementById('switch_result_passive').style.display = 'block';
-    }, 2500);
+	}, 2500);
 
-    setTimeout(()=>{
-	    document.getElementById('switch_result_passive').style.display = 'none';
-    }, 4500);
+	setTimeout(()=>{
+		document.getElementById('switch_result_passive').style.display = 'none';
+	}, 4500);
 }
 
 Template.GameLayout.events({
 	'click': function () {
 		removeMessages();
-  	}
+	}
 });
 
 //remove all messages from screen
@@ -153,14 +156,14 @@ function removeMessages(){
 	if(status == "lock"){
 		Session.set("onMessage", "hold");
 	}else if(status == "hold" || status == "free"){ //should not include 'free', but hardcoded to solve a bug(rare though). look forward a better solution.
-		document.getElementById("winPopup1").classList.remove("winPopup1");
-	  	document.getElementById("winPopup2").classList.remove("winPopup2");
-	  	document.getElementById("drawPopup").classList.remove("drawPopup");
-	  	document.getElementById("losePopup1").classList.remove("losePopup1");
-	  	document.getElementById("losePopup2").classList.remove("losePopup2");
+	document.getElementById("winPopup1").classList.remove("winPopup1");
+	document.getElementById("winPopup2").classList.remove("winPopup2");
+	document.getElementById("drawPopup").classList.remove("drawPopup");
+	document.getElementById("losePopup1").classList.remove("losePopup1");
+	document.getElementById("losePopup2").classList.remove("losePopup2");
 
-	  	Session.set("onMessage", "free");
-	}
+	Session.set("onMessage", "free");
+}
 }
 
 	//subscribe to selected Player info reactively
@@ -182,10 +185,7 @@ function removeMessages(){
 		}
 	});
 
-Template.ControlPanel.helpers({
-	// p2Name: function(){
-	// 	return Session.get('p2Name');
-	// },
+	Template.ControlPanel.helpers({
 	p2Level: ()=>{
 		return Session.get("p2Level"); 
 	},
@@ -253,10 +253,13 @@ Template.ControlPanel.helpers({
 	power_status:()=>{
 		return Session.get(POWER_TIMER + Session.get("p1Role")) == null ? "":"shown";
 	},
+	targetBtn_status: ()=>{
+		return (Session.get('p2Id') == null || Session.get(Session.get('p2Id')) == 'locked') ? 'unready':'ready';
+	}
 
 });
 
-Template.ControlPanel.events({
+	Template.ControlPanel.events({
 	//switch role
 	'click .abled': () => {
 		var index = event.target.closest('.abled').getAttribute('name');
@@ -266,16 +269,11 @@ Template.ControlPanel.events({
 		Session.set('p1RoleLevel',p1RoleLevel);
 	},
 	'click .ready':(index)=>{ //attack
-		//remove attackMax icon on the dashboard
-		if(Session.get('attackMax') == true){
-			document.getElementById("board_attackMax").style.display = "none";
-		}
-		
+		document.getElementById("bar_attackMax").classList.remove("shown");
 		document.getElementById('attack_text').classList.add('attack_text');
 		Meteor.setTimeout(()=>{
 			document.getElementById('attack_text').classList.remove('attack_text');
 		}, 1000);
-
 
 		attack();
 	},
@@ -298,14 +296,13 @@ Template.ControlPanel.events({
 
 	'click .skillBtn':()=>{
 		var htmlsIndex = Session.get('selectedSkill');
-		
-			Meteor.call('players.findSkillatIndex', htmlsIndex, function(error, sName) {
-			    applySkill(sName);
-			});
+		Meteor.call('players.findSkillatIndex', htmlsIndex, function(error, sName) {
+			applySkill(sName);
+		});
 
-			Session.set('selectedSkill',null);
-			Meteor.call('players.removeSkill',htmlsIndex);
-			
+		Session.set('selectedSkill',null);
+		Meteor.call('players.removeSkill',htmlsIndex);
+
 	},
 	'click .venture':()=>{
 		venture();
@@ -320,33 +317,20 @@ function open_menu(){
 	localStorage.setItem("menu_status", "shown");
 }
 
-turnOffAttackBtn=function(){
-	//switch targetBtn to unready mode
-	document.getElementsByClassName("targetBtn")[0].classList.add("unready");
-	document.getElementsByClassName("targetBtn")[0].classList.remove("ready");
-};
-
-turnOnAttackBtn = function (){
-	//switch targetBtn to ready mode
-	document.getElementsByClassName("targetBtn")[0].classList.add("ready");
-	document.getElementsByClassName("targetBtn")[0].classList.remove("unready");
-
-};
-
 function venture(){
 	//try reducing an amount of coins
 	Meteor.call('players.reduceVentureCoins', NUM_COINS_PER_VENTURE, (error, result) => {
 		if(error){
-  			console.log(error);
-  			return;
-  		}else{
-  			if(!result){
-  				popupNotes("you don't have enough coins");
-  				return;
-  			}else if(result){
-  				doVenture();
-  			}
-  		}
+			console.log(error);
+			return;
+		}else{
+			if(!result){
+				popupNotes("You don't have enough coins");
+				return;
+			}else if(result){
+				doVenture();
+			}
+		}
 	});
 
 }
@@ -362,7 +346,7 @@ function doVenture(){
 		}else if (2 <= ran && ran <= 8){
 			generateSkill();
 		}else{
-			popupNotes("nice try!");
+			popupNotes("Nice try!");
 		}
 	}else{
 		// 1/10 - new character ; 8/10 - new skills; 1/10- nothing;
@@ -385,27 +369,27 @@ function doVenture(){
 
 function generateCharacter(){
 
-  	Meteor.call('players.allRolesAtMaximum', (error, result) => {
-  		if(error){
-  			console.log(error);
-  			return;
-  		}else{
-		   	if(result == true){
-		   		return false;
-		   	}else if(result == false){
+	Meteor.call('players.allRolesAtMaximum', (error, result) => {
+		if(error){
+			console.log(error);
+			return;
+		}else{
+			if(result == true){
+				return false;
+			}else if(result == false){
 		   		//ok
 		   		//generate random role has level < max level
-		        var ranCharacterIndex = Math.floor(Math.random() * MAX_LEVEL);
-		        while(Players.findOne({'owner':Meteor.userId()}).characters[ranCharacterIndex].level == MAX_LEVEL){
-		          ranCharacterIndex = Math.floor(Math.random() * MAX_LEVEL);
-		        }
+		   		var ranCharacterIndex = Math.floor(Math.random() * MAX_LEVEL);
+		   		while(Players.findOne({'owner':Meteor.userId()}).characters[ranCharacterIndex].level == MAX_LEVEL){
+		   			ranCharacterIndex = Math.floor(Math.random() * MAX_LEVEL);
+		   		}
 		   		Meteor.call('players.insertRole', ranCharacterIndex);
 
-		   		popupNotes("Congratulations! you gained -" + CHARACTERS[ranCharacterIndex] +"-", "LEVEL UP!");
+		   		popupNotes("Congras! New indentity gained <br/>-" + CHARACTERS[ranCharacterIndex].toUpperCase() +"-", "LEVEL UP!");
 		   		Meteor.call('players.incLevel');
 		   	}
-	   }
-  	});
+		   }
+		});
 }
 
 function generateSkill(){
@@ -432,14 +416,14 @@ function generateSkill(){
 	}
 
 	Meteor.call('players.addSkill',ranSkillIndex,(error, result)=>{ // exceed max number of skills
-  		if(error){
-  			console.log(error);
-  			return;
-  		}else{
+		if(error){
+			console.log(error);
+			return;
+		}else{
 			if(result == false){
-				popupNotes("Ah! no space for a new skill!");
+				popupNotes("Ah!<br/>No space for a new skill");
 			}else if(result == true){
-				popupNotes("Congratulations! you gained -" + SKILLS[ranSkillIndex]+"-");
+				popupNotes("Congras! New skill gained <br/>-" + SKILLS[ranSkillIndex].toUpperCase() +"-");
 			}
 		}
 	});
@@ -449,29 +433,30 @@ function generateSkill(){
 function prune1(){
 	var detector = Session.get('p2Role');
 	//if 'cheat' skill is applied by the opponent
+
 	if (Players.findOne({_id: p2Id}).cheat.status == true){
 		detector = Players.findOne({_id: p2Id}).cheat.role;
 	}
-   	var random = Math.floor(Math.random() * MAX_ROLES); 
-   	while (random == detector){
-  		random = Math.floor(Math.random() * MAX_ROLES); 
-   	}
-   	popupNotes("NEW CLUE: your opopnent is not a " + CHARACTERS[random]);
+	var random = Math.floor(Math.random() * MAX_ROLES); 
+	while (random == detector){
+		random = Math.floor(Math.random() * MAX_ROLES); 
+	}
+	popupNotes("New Clue:<br/>Not A " + CHARACTERS[random].toUpperCase());
 }
 
 function prune2(){
-    var detector = Session.get('p2Role');
+	var detector = Session.get('p2Role');
 	//if 'cheat' skill is applied by the opponent
 	if (Players.findOne({_id: p2Id}).cheat.status == true){
 		detector = Players.findOne({_id: p2Id}).cheat.role;
 	}
-    var random1 = 0;
-    var random2 = 0; 
-    while (random1 == detector || random2 == detector || random1 == random2){
-    	random1 = Math.floor(Math.random() * MAX_ROLES); 
-    	random2 = Math.floor(Math.random() * MAX_ROLES);
-    }
-    popupNotes("NEW CLUE: your opopnent is not one of: " +  CHARACTERS[random1] + " " +CHARACTERS[random2]);
+	var random1 = 0;
+	var random2 = 0; 
+	while (random1 == detector || random2 == detector || random1 == random2){
+		random1 = Math.floor(Math.random() * MAX_ROLES); 
+		random2 = Math.floor(Math.random() * MAX_ROLES);
+	}
+		popupNotes("New Clue:<br/>Not one of " + CHARACTERS[random].toUpperCase() + " " +CHARACTERS[random2].toUpperCase());
 }
 
 function applySkill(skill){
@@ -479,38 +464,37 @@ function applySkill(skill){
 	switch(skill) {
 		//GODSEYE prune a incorrect role for player
 	    case "GODSEYE": //need target, immediate
-	    	prune1();
-	        break;
+		    prune1();
+		    break;
 
 		//GODSEYE-X prune 2 incorrect roles for player
-	    case "GODSEYE-X": 
-	    	prune2();
-	        break;
+		case "GODSEYE-X": 
+			prune2();
+			break;
 
 	    case "CHEAT": //no target, last 2 mins
 	       //change selected character to another, change back when time's out
 	       Meteor.call('players.cheat');
 	       set_cheat_timer();
-		   document.getElementById("board_cheat").classList.add("shown");
+	       document.getElementById("bar_cheat").classList.add("shown");
 	       break;
 
 	    case "SUPER-SWITCH": //need target, attack all, immediate
-	       Meteor.call('players.superSwitch', Meteor.userId(), p2Id, ()=>{
-	       		display_superSwitch();
-	       });	
-	       break;
+		    Meteor.call('players.superSwitch', Meteor.userId(), p2Id, ()=>{
+		    	display_superSwitch();
+		    });	
+		    break;
 
 	    case "POWER-MAX": //no target, last 2 mins, when applied hang at the top of the screen
-	       Meteor.call('players.power_to_max', p1Role);
-	       set_power_timer(p1Role);
-	       document.getElementById("board_powerMax").classList.add("shown");
-	       break;
+		    Meteor.call('players.power_to_max', p1Role);
+		    set_power_timer(p1Role);
+		    document.getElementById("bar_powerMax").classList.add("shown");
+		    break;
 
 	    case "ATTACK-MAX": //no target, one-time, when applied hang at the top of the screen
-	       Session.set("attackMax", true);
-	       Meteor.call('players.setAttackMax', true);
-	       document.getElementById("board_attackMax").style.display = "block";
-	       break;
+		    Session.set("attackMax", true);
+		    document.getElementById("bar_attackMax").classList.add("shown");
+		    break;
 
 	    default:
 	    	console.log("ERROR: illegal skill");
@@ -518,74 +502,74 @@ function applySkill(skill){
 }
 
 function display_superSwitch(){
-	       		var _p1Role = Session.get('p1Role');
-	       		var _p1RoleLevel = Session.get('p1RoleLevel');
-	       		flash_blacknWhite(document.getElementById('switch_confirmation'), 2);
-	       		show_active_switch_result(_p1Role, _p1RoleLevel);
-	       		flash(document.getElementById('starContainer'+_p1Role), 6, 2000);
+	var _p1Role = Session.get('p1Role');
+	var _p1RoleLevel = Session.get('p1RoleLevel');
+	flash_blacknWhite(document.getElementById('switch_confirmation'), 2);
+	show_active_switch_result(_p1Role, _p1RoleLevel);
+	flash(document.getElementById('starContainer'+_p1Role), 6, 2000);
 }
 
 function show_active_switch_result(roleIndex, roleNewLevel){
-    setTimeout(()=>{
-	    document.getElementById('switch_result_active').innerHTML = CHARACTERS[roleIndex] + " is now " + roleNewLevel + " stars";
+	setTimeout(()=>{
+		document.getElementById('switch_result_active').innerHTML = CHARACTERS[roleIndex] + " is now " + roleNewLevel + " stars";
 		document.getElementById('switch_result_active').style.display = 'block';
-    }, 2000);
+	}, 2000);
 
-    setTimeout(()=>{
-	    document.getElementById('switch_result_active').style.display = 'none';
-    }, 4000);
+	setTimeout(()=>{
+		document.getElementById('switch_result_active').style.display = 'none';
+	}, 4000);
 }
 
 //set a timer for cheat skills
 function set_cheat_timer(){ 
-	       if(Session.get("lastest_cheat_timer") == null)
-	       		Session.set("lastest_cheat_timer", 0);
+	if(Session.get("lastest_cheat_timer") == null)
+		Session.set("lastest_cheat_timer", 0);
 
-	       var timer_index = Session.get("lastest_cheat_timer") + 1;
-	       Session.set("lastest_cheat_timer", timer_index);
-	       Session.set("cheat_timer", CHEAT_TIMER_COUNTDOWN_FROM);
+	var timer_index = Session.get("lastest_cheat_timer") + 1;
+	Session.set("lastest_cheat_timer", timer_index);
+	Session.set("cheat_timer", CHEAT_TIMER_COUNTDOWN_FROM);
 
-	       for(var i = 0; i <= CHEAT_TIMER_COUNTDOWN_FROM; i++){
-				Meteor.setTimeout(()=>{
+	for(var i = 0; i <= CHEAT_TIMER_COUNTDOWN_FROM; i++){
+		Meteor.setTimeout(()=>{
 					//store lastest timer index to prevent having multiple timers modify the time at the same time
 					if(timer_index == Session.get("lastest_cheat_timer")){
 						if(Session.get("cheat_timer") == 0){
 							Session.set("cheat_timer", null);
 							Meteor.call('players.cheat_recover');
-	       					document.getElementById("board_cheat").classList.remove("shown");				
+							document.getElementById("bar_cheat").classList.remove("shown");				
 						}else{
 							Session.set("cheat_timer", Session.get("cheat_timer")-1);
 						}
 					}
 				}, i * 1000 );
-	       }
+	}
 }
 
 //set a timer for cheat skills
 function set_power_timer(_p1Role){ //_p1Role field is optional
-	       if(Session.get('lastest_power_timer_'+_p1Role) == null)
-	       		Session.set('lastest_power_timer'+_p1Role, 0);
+	if(Session.get('lastest_power_timer_'+_p1Role) == null)
+		Session.set('lastest_power_timer'+_p1Role, 0);
 
-	       var timer_index = Session.get('lastest_power_timer'+_p1Role) + 1;
-	       Session.set('lastest_power_timer'+_p1Role, timer_index);
-	       Session.set('power_timer'+_p1Role, POWER_TIMER_COUNTDOWN_FROM);
+	var timer_index = Session.get('lastest_power_timer'+_p1Role) + 1;
+	Session.set('lastest_power_timer'+_p1Role, timer_index);
+	Session.set('power_timer'+_p1Role, POWER_TIMER_COUNTDOWN_FROM);
 
-	       for(var i = 0; i <= POWER_TIMER_COUNTDOWN_FROM; i++){
-				Meteor.setTimeout(()=>{
+	for(var i = 0; i <= POWER_TIMER_COUNTDOWN_FROM; i++){
+		Meteor.setTimeout(()=>{
 					//store lastest timer index to prevent having multiple timers modify the time at the same time
 					if(timer_index == Session.get('lastest_power_timer'+_p1Role)){
 						if(Session.get('power_timer'+_p1Role) == 0){
 							Session.set('power_timer'+_p1Role, null);
 							Meteor.call('players.power_recover', _p1Role);
 							if(Session.get('p1Role') == _p1Role){
-								document.getElementById("board_powerMax").classList.remove("shown");
+								document.getElementById("bar_powerMax").classList.remove("shown");
 							}
 						}else{
 							Session.set('power_timer'+_p1Role, Session.get('power_timer'+_p1Role)-1);
 						}
 					}
 				}, i * 1000 );
-	       }
+	}
 }
 
 
@@ -624,15 +608,11 @@ function attack(){
 function set_timer_for_continuse_attack(){
 	var _p2Id = Session.get('p2Id');
 	Session.set(_p2Id, 'locked');
-
 	makePlayerTransparent(_p2Id);
-	turnOffAttackBtn();
+
 	Meteor.setTimeout(()=>{
 		makePlayerOpaque(_p2Id);
-		Session.set(_p2Id, null);
-		if(_p2Id == p2Id){
-			turnOnAttackBtn();
-		}
+		Session.set(_p2Id, "unlocked");
 	}, CONTINOUS_ATTACK_INTERVEL * 1000);
 }
 
@@ -657,7 +637,7 @@ function show_result(result, reward, penalty){
 		Meteor.setTimeout(()=>{
 			document.getElementById("winPopup1").classList.add("winPopup1");
 			document.getElementById("reward_text").innerHTML = reward + " COINS";
-  			document.getElementById("winPopup2").classList.add("winPopup2");
+			document.getElementById("winPopup2").classList.add("winPopup2");
 		}, 1000);
 
 	}else if(result == 2){
@@ -665,7 +645,7 @@ function show_result(result, reward, penalty){
 		Meteor.setTimeout(()=>{
 			document.getElementById("penalty_text").innerHTML = "- "+ penalty + " COINS";
 			document.getElementById("losePopup1").classList.add("losePopup1");
-  			document.getElementById("losePopup2").classList.add("losePopup2");
+			document.getElementById("losePopup2").classList.add("losePopup2");
 		}, 1000);
 
 	}else if(result == 0){
@@ -737,7 +717,7 @@ function popupNotes(message1, message2){
 	Session.set("onMessage", "lock");
 
 	var popup = document.getElementById("notePopup1");
-  	popup.classList.add("notePopup1");
+	popup.classList.add("notePopup1");
 	document.getElementById("note1").innerHTML = message1;
 
 	if(message2){
@@ -746,13 +726,4 @@ function popupNotes(message1, message2){
 		document.getElementById("note2").innerHTML = message2;
 	}
 }
-
-
-
-
-
-
-
-
-
 

@@ -1,43 +1,49 @@
 
+
 @font-face {
-  font-family: 'arcadeclassic';
-  src: url('/fonts/ARCADECLASSIC.ttf');
+	font-family: 'arcadeclassic';
+	src: url('/fonts/ARCADECLASSIC.ttf');
+}
+
+@font-face {
+	font-family: 'levi-adobe-dia';
+	src: url('/fonts/levi-adobe-dia/Adobe Dia.ttf');
 }
 
 body { 
 	touch-action: none;
 	font-family: 'arcadeclassic';
-	width: 100%;
-  	height: 100%;
- 	margin: 0px;
+	letter-spacing: 0.05vw;
+	word-spacing: 1.5vw;
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
 }
 
 /*===================MAP==================*/
 
 .map-container {
 	position: absolute;
-	/*top: -210px;*/
-	top: -32%;
-	left: -30%;
-  	width: 155%;
-  	height: 106vh;
+	top: -35vh;
+	left: -30vw;
+	width: 155vw;
+	height: 106vh;
 	/*tilt code*/
-     -webkit-transform: perspective(500px) rotateX(50deg) !important;
-     transform: perspective(500px) rotateX(50deg) !important;
+	-webkit-transform: perspective(500px) rotateX(50deg) !important;
+	transform: perspective(500px) rotateX(50deg) !important;
 }
 
 #map {
-	border: green solid 1px;
-    position: relative;
-    height: 100vh; 
-    width: 100vw; 
- }
+   	position: relative;
+	height: 100vh; 
+	width: 100vw; 
+}
 
 
- /*===================END==================*/
+/*===================END==================*/
 
 
- /*===================GAME layout==================*/
+/*===================GAME layout==================*/
 
 .hidden{
 	visibility: hidden !important;
@@ -50,13 +56,13 @@ body {
 }
 
 @-webkit-keyframes fade_in {
-  from {opacity:0.0;} 
-  to {opacity: 1.0;}
+	from {opacity:0.0;} 
+	to {opacity: 1.0;}
 }
 
 @keyframes fade_in {
-  from {opacity:0.0;} 
-  to {opacity: 1.0;}
+	from {opacity:0.0;} 
+	to {opacity: 1.0;}
 }
 
 .display_none{
@@ -78,114 +84,112 @@ body {
 .controlPanel{
 	visibility: inherit;
 	position: absolute;
-	bottom: 0px;
-	height: 250px;
-	width: 100%;
-	left: 0%;
+	bottom: 1vw;
+	height: 37vh;
+	width: 100vw;
+	left: 0vw;
 	background: url('images/panel.png');
-	background-size: 100% 250px;
+	background-size: 100vw 37vh;
 	background-repeat: no-repeat;
 }
 
 .winPopup1{
 	position: absolute;
-	left: 0%; 
-	top: 30%;
-	height: 50px; 
-	width:100%;
+	left: 0; 
+	top: 35vh;
+	height: 8vh; 
+	width: 100vw;
 	background: url('images/win_popup1.png');
-	background-size: 100% 50px;
+	background-size: 100vw 8vh;
 	background-repeat: no-repeat;
 	-webkit-animation: pop_a 0.3s;
 	animation: pop_a 0.3s；
 }
 
 @-webkit-keyframes pop_a {
-  from {left: -100%;} 
-  to {left: 0%;}
+	from {left: -100vw;} 
+	to {left: 0vw;}
 }
 
 @keyframes pop_a {
-  from {left: -100%;} 
-  to {left: 0%;}
+	from {left: -100vw;} 
+	to {left: 0vw;}
 }
-
-
 
 .winPopup1 > .win_text{
 	font-family: 'arcadeclassic';
 	position: absolute;
-	left: 35%;
-	top: 10px;
-	font-size: 30px;
+	left: 35vw;
+	top: 2vh;
+	font-size: 8vw;
 	text-align: center;	
 	-webkit-animation: pop_text_a 0.6s;
 	animation: pop_text_a 0.6s；
 }
 
 @-webkit-keyframes pop_text_a {
-  from {left: -200%;} 
-  to {left: 35%;}
+	from {left: -200vw;} 
+	to {left: 35vw;}
 }
 
 @keyframes pop_text_a {
-  from {left: -200%;} 
-  to {left: 35%;}
+	from {left: -200vw;} 
+	to {left: 35vw;}
 }
 
 .winPopup2{
 	position: absolute;
-	left: 0%; 
-	top: 40%;
-	height: 30px; 
-	width:100%;
+	left: 0vw; 
+	top: 45vh;
+	height: 4vh; 
+	width: 100vw;
 	background: url('images/win_popup1.png');
-	background-size: 100% 30px;
+	background-size: 100vw 4vh;
 	background-repeat: no-repeat;
 	-webkit-animation: pop_b 0.6s;
 	animation: pop_b 0.6s；
 }
 
 @-webkit-keyframes pop_b {
-  from {left: -200%;} 
-  to {left: 0%;}
+	from {left: -200vw;} 
+	to {left: 0vw;}
 }
 
 @keyframes pop_b {
-  from {left: -200%;} 
-  to {left: 0%;}
+	from {left: -200vw;} 
+	to {left: 0vw;}
 }
 
 
 .winPopup2 > .reward_text{
 	font-family: 'arcadeclassic';
 	position: absolute;
-	left: 35%;
-	top: 5px;
-	font-size: 20px;
+	left: 35vw;
+	top: 1vh;
+	font-size: 5vw;
 	text-align: center;	
 	-webkit-animation: pop_text_b 0.9s;
 	animation: pop_text_b 0.9s；
 }
 
 @-webkit-keyframes pop_text_b {
-  from {left: -300%;} 
-  to {left: 35%;}
+	from {left: -300vw;} 
+	to {left: 35vw;}
 }
 
 @keyframes pop_text_b {
-  from {left: -300%;} 
-  to {left: 35%;}
+	from {left: -300vw;} 
+	to {left: 35vw;}
 }
 
 .drawPopup{
 	position: absolute;
-	left: 0%; 
-	top: 30%;
-	height: 50px; 
-	width:100%;
+	left: 0; 
+	top: 35vh;
+	height: 8vh; 
+	width: 100vw;
 	background: url('images/draw_popup.png');
-	background-size: 100% 50px;
+	background-size: 100vw 8vh;
 	background-repeat: no-repeat;
 	-webkit-animation: pop_a 0.3s;
 	animation: pop_a 0.3s；
@@ -194,9 +198,9 @@ body {
 .drawPopup > .draw_text{
 	font-family: 'arcadeclassic';
 	position: absolute;
-	left: 40%;
-	top: 10px;
-	font-size: 30px;
+	left: 35vw;
+	top: 2vh;
+	font-size: 8vw;
 	text-align: center;	
 	-webkit-animation: pop_text_a 0.6s;
 	animation: pop_text_a 0.6s；
@@ -204,12 +208,11 @@ body {
 
 .losePopup1{
 	position: absolute;
-	left: 0%; 
-	top: 30%;
-	height: 50px; 
-	width:100%;
+	top: 35vh;
+	height: 8vh; 
+	width: 100vw;
 	background: url('images/lose_popup.png');
-	background-size: 100% 50px;
+	background-size: 100vw 8vh;
 	background-repeat: no-repeat;
 	-webkit-animation: pop_a 0.3s;
 	animation: pop_a 0.3s；
@@ -219,9 +222,9 @@ body {
 .losePopup1 > .lose_text{
 	font-family: 'arcadeclassic';
 	position: absolute;
-	left: 35%;
-	top: 10px;
-	font-size: 30px;
+	left: 35vw;
+	top: 2vh;
+	font-size: 8vw;
 	text-align: center;	
 	-webkit-animation: pop_text_a 0.6s;
 	animation: pop_text_a 0.6s；
@@ -229,12 +232,12 @@ body {
 
 .losePopup2{
 	position: absolute;
-	left: 0%; 
-	top: 40%;
-	height: 30px; 
-	width:100%;
+	left: 0vw; 
+	top: 45vh;
+	height: 4vh; 
+	width: 100vw;
 	background: url('images/lose_popup.png');
-	background-size: 100% 30px;
+	background-size: 100vw 4vh;
 	background-repeat: no-repeat;
 	-webkit-animation: pop_b 0.6s;
 	animation: pop_b 0.6s；
@@ -244,9 +247,9 @@ body {
 .losePopup2 > #penalty_text{
 	font-family: 'arcadeclassic';
 	position: absolute;
-	left: 35%;
-	top: 5px;
-	font-size: 20px;
+	left: 35vw;
+	top: 1vh;
+	font-size: 5vw;
 	text-align: center;	
 	-webkit-animation: pop_text_b 0.9s;
 	animation: pop_text_b 0.9s；
@@ -255,234 +258,284 @@ body {
 .menu_button{
 	font-family: 'arcadeclassic';
 	position: absolute;
-	top: 3%;
-	right: 5px;
-	font-size: 20px;
-	width: 130px;
-	text-align: center;
+	top: 4vh;
+	right: 5vw;
+	font-size: 6vw;
+	width: 20vw;
+	text-align: right;
 }
 
 .menu_button:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 .venture{
 	font-family: 'arcadeclassic';
 	position: absolute;
-	top: 8%;
-	right: 5px;
-	font-size: 20px;
-	width: 130px;
-	text-align: center;
+	top: 10vh;
+	right: 5vw;
+	font-size: 6vw;
+	width: 40vw;
+	text-align: right;
+	word-spacing: -0.2vw;
+	letter-spacing: 0.04vw;
 }
 
 .venture:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
-
-.board{
+.bar{
 	position: absolute;
-	top: 10px;
-	left: 35%;
-	width: 120px;
-	height: 50px;
+	top: 2vh;
+	left: 30vw;
+	width: 40vw;
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-#board_attackMax{
-	position: absolute;
-	left: 0px;
-	top: 3px;
-	display: none;
-	width:35px;
-	height:50px;
+#bar_attackMax{
+	visibility: hidden;
+	margin: 1vw;
+	width: 9.5vw;
+	height: 15vw;
 	background: url('images/skills/icon_attackMax.png');
-	background-size: 35px auto;
+	background-size: 9.5vw auto;
 	background-repeat: no-repeat;
 	opacity: 0.8;
+	display: inline-block;
 }
 
-#board_cheat{
+#bar_cheat{
 	visibility: hidden;
-	position: absolute;
-	left: 40px;
-	top: 0px;
-	width:30px;
-	height:50px;
+	margin: 1vw;
+	position: relative;
+	width: 8vw;
+	height: 15vw;
 	background: url('images/skills/icon_cheat.png');
-	background-size: 30px auto;
+	background-size: 8vw auto;
 	background-repeat: no-repeat;
 	opacity: 0.8;
+	display: inline-block;
 }
 
-#board_cheat_timer{
+#bar_cheat_timer{
 	position: absolute;
-	left: 40px;
-	top: 40px;
-	width: 30px;
-	font-size: 15px;
+	bottom: 0;
+	font-size: 4vw;
 	text-align: center;
 	color: grey;
+	width: 100%; /*!!*/
 }
 
-#board_powerMax{
+#bar_powerMax{
 	visibility: hidden;
-	position: absolute;
-	left: 80px;
-	top: 0px;
-	width:30px;
-	height:50px;
+	margin: 1vw;
+	position: relative;
+	width: 8vw;
+	height: 15vw;
 	background: url('images/skills/icon_powerMax.png');
-	background-size: 30px auto;
+	background-size: 8vw auto;
 	background-repeat: no-repeat;
 	opacity: 0.8;
+	display: inline-block;
 }
 
-#board_powerMax_timer{
+#bar_powerMax_timer{
 	position: absolute;
-	left: 80px;
-	top: 40px;
-	width: 30px;
-	font-size: 15px;
+	bottom: 0;
+	font-size: 4vw;
 	text-align: center;
 	color: grey;
+	width: 100%; /*!!*/
 }
 
 .profile{
-	font-size: 15px;
-	height:100px;
-	width: 130px;
+	font-size: 6vw;
+	height: 25vw;
+	width: 30vw;
 	position: absolute;
 	text-align: center;
-	top: 1%;
-	left: 5%;
+	top: 3vh;
+	left: 5vw;
 }
 
-.userlevel{
-	display: inline;
-	font-size:12px;
-	float: center;
+.levelMedal{
+	position: absolute;
+	width: 6vw;
+	height: 10vw;
+	background: url('images/levelBadge0.png') left center;
+	animation: levelMedalPlay 1s steps(6) infinite;
+	background-repeat: no-repeat;
+	background-size: 38.76vw auto;
+}
+
+@keyframes levelMedalPlay {
+	100% { background-position: -38.76vw; }
+}
+
+.levelMedalValue{
+	position: absolute;
+	font-family: 'arcadeclassic';
+	font-weight: lighter;
+	font-size: 5vw;
+	left: 10vw;
+	top: 3vw;
+}
+
+.goldCoin{
+	position: absolute;
+	top: 12vw;
+	width: 5.5vw;
+	height: 10vw;
+	background: url('images/goldCoin.png') left center;
+	background-size: 42vw 6vw;
+	animation: goldCoinPlay 0.7s steps(7) infinite;
+	background-repeat: no-repeat;
+}
+
+@keyframes goldCoinPlay {
+	100% { background-position: -42vw; }
+}
+
+.goldCoinValue{
+	position: absolute;
+	top: 15vw;
+	left: 10vw;
+	font-family: 'arcadeclassic';
+	font-weight: lighter;
+	font-size: 5vw;
 }
 
 .skill_name{
 	position: absolute;
-	top: 10px;
-	right: 50px;
-	width: 120px;
-	font-size: 18px;
+	top: 0.2vh;
+	right: 8vw;
+	width: 30vw;
+	height: 6vh;
+	font-size: 5vw;
 	color: grey;
 	text-align: center;
 	font-weight: lighter;
+	display: flex;
+	align-items: center;
 }
 
 .skills{
 	position: absolute;
-	bottom: 60px;
-	right: 25px;
-	width: 180px;
-	height: 150px;
+	top: 5vh;
+	left: 45vw;
+	width: 52vw;
+	height: 25vh;
+	/*border: black solid 1px;*/
 }
 
 .skill{
 	position: relative;
 	display: inline-block;
-	height: 50px;
-	width: 60px;
-	margin-right: -7px;
-	margin-bottom: -6px;
+	height: 15vw;
+	width: 17vw;
+	margin-right: -4vw;
+	margin-bottom: -4vw;
+	/*border: red solid 1px;*/
 }
 
+.dummy_space2{
+	visibility: hidden;
+	display: inline-block;
+	height: 15vw;
+	width: 1vw;
+	margin-right: -2vw;
+	margin-bottom: -4vw;
+	/*border: yellow solid 1px;*/
+}
 
 .base{
 	position: absolute;
-	bottom:0px;
-	width:65px;
-	height:34px;
+	bottom: 0;
+	width: 17vw;
+	height: 9.5vw;
 	background: url('images/skills/skillbg.png');
-	background-size: 65px 34px;
-
+	background-size: 17vw 9.5vw;
+	/*border: blue solid 1px;*/
 }
 
+
 .GODSEYE{
-	width:65px;
-	height:45px;
+	width: 17vw;
+	height: 12vw;
 	background: url('images/skills/eyeball_seat.png');
-	background-size: 65px 45px;
+	background-size: 17vw 12vw;
 }
 
 .select{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 .GODSEYE-X{
-	width:65px;
-	height:45px;
+	width: 17vw;
+	height: 12vw;
 	background: url('images/skills/eyeballx_seat.png');
-	background-size:65px 45px;
+	background-size: 17vw 12vw;
 }
 .CHEAT{
-	width:65px;
-	height:45px;
+	width: 17vw;
+	height: 12vw;
 	background: url('images/skills/cheat_seat.png');
-	background-size:65px 45px;
+	background-size: 17vw 12vw;
 }
 
 .SUPER-SWITCH{
-	width:65px;
-	height:45px;
+	width: 17vw;
+	height: 12vw;
 	background: url('images/skills/landmine_seat.png');
-	background-size:65px 45px;
+	background-size: 17vw 12vw;
 }
 .POWER-MAX{
-	width:65px;
-	height:45px;
+	width: 17vw;
+	height: 12vw;
 	background: url('images/skills/powermax_seat.png');
-	background-size:65px 45px;
+	background-size: 17vw 12vw;
 }
 
 .ATTACK-MAX{
-	width:65px;
-	height:45px;
+	width: 17vw;
+	height: 12vw;
 	background: url('images/skills/attackmax_seat.png');
-	background-size:65px 45px;
+	background-size: 17vw 12vw;
 }
-
 
 .skillBtn{
 	position: absolute;
-	right: 100px;
-	bottom: 15px;
-	width: 50px;
-	height: 55px;
+	left: 63vw;
+	bottom: 3vh;
+	width: 13vw;
+	height: 15vw;
 	background: url('images/skills/skill_btn.png');
-	background-size: 50px 55px;
-	background-position:center bottom;
+	background-size: 13vw 15vw;
+	background-position: center bottom;
 	background-repeat: no-repeat;
 }
 
 .skillBtn_disabled{
 	position: absolute;
-	right: 100px;
-	bottom: 15px;
-	width: 50px;
-	height: 55px;
+	left: 63vw;
+	bottom: 3vh;
+	width: 13vw;
+	height: 15vw;
 	background: url('images/skills/skill_btn_disabled.png');
-	background-size: 50px 55px;
+	background-size: 13vw 15vw;
 	background-position:center bottom;
 	background-repeat: no-repeat;
 }
 
 .skillBtn:active {
 	background: url('images/skills/skill_btn_pressed.png');
-	background-size: 50px 45px;
+	background-size: 13vw 12vw;
 	background-position: center bottom;
 	background-repeat: no-repeat;
-}
-
-.rotateTargetContainer{
-	position: absolute;
-	top:-50px;
-	left: 38%;
 }
 
 #attack_text{
@@ -490,150 +543,122 @@ body {
 }
 
 .attack_text{
-	display: inline !important;
-	position: absolute;
-	top: 0px;
-	left: 0%;
+	/*float at center vertically and horizontally*/
+	position: absolute; 
+	display: flex !important;
+	justify-content: center;
+	align-items: center; 
+	
+	top: -15vh;
+	height: 30vh;
 	width: 100%;
-	text-align: center;
 	-webkit-animation: attack 1s;
 	animation: attack 1s;
+	color: #a0222b;
 }
 
 @-webkit-keyframes attack {
-  from {font-size: 20px; opacity: 1.0;} 
-  to {font-size: 70px; opacity: 0.0;}
+	from {font-size: 2vw; opacity: 1.0;} 
+	to {font-size: 30vw; opacity: 0.0;}
 }
 
 @keyframes attack {
-  from {font-size: 20px; opacity: 1.0;} 
-  to {font-size: 70px; opacity: 0.0;}
+	from {font-size: 2px; opacity: 1.0;} 
+	to {font-size: 30vw; opacity: 0.0;}
 }
+
+.rotateTargetContainer{
+	position: absolute;
+	top: -8vw;
+	left: 35vw;
+}
+
 
 /*unready*/
 .targetBtn.unready{
-	width: 90px;
-	height:90px;
-	background: url('images/rotateTarget_dark.png') left center;
-	background-size: 450px 90px;
-	animation: unreadyPlay 0.8s steps(5) infinite;
-}
-
-@keyframes unreadyPlay {
-   100% { background-position: -450px; }
+	width: 33vw;
+	height: 8.8vw;
+	background: url('images/attack_unready.png');
+	background-size: 33vw auto;
+	background-repeat: no-repeat;
+	/*border: black solid 1px;*/
 }
 
 .targetBtn.unready:active {
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 .targetBtn.ready{
-	width: 90px;
-	height: 90px;
-	background: url('images/rotateTarget_normal.png') left center;
-	background-size: 450px 90px;
-	animation: readyPlay 0.8s steps(5) infinite;
-}
-
-@keyframes readyPlay {
-   100% { background-position: -450px; }
+	width: 33vw;
+	height: 8.8vw;
+	background: url('images/attack_ready.png');
+	background-size: 33vw auto;
+	background-repeat: no-repeat;
+	/*border: black solid 1px;*/
 }
 
 .targetBtn.ready:active {
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
-.levelMedal{
-	float:left;
-	margin: 5px;
-	width: 18px;
-	height: 30px;
-	background: url('images/levelBadge0.png') left center;
-	animation: levelMedalPlay 1s steps(6) infinite;
-	background-repeat: no-repeat;
-	background-size: 120px 30px;
-}
-
-@keyframes levelMedalPlay {
-   100% { background-position: -120px; }
-}
-
-.levelMedalValue{
-	font-family: 'arcadeclassic';
-	font-weight: lighter;
-	font-size: 20px;
-	float:left;
-	margin: 10px;
-	text-align: center;
-
-}
-
-.goldCoin{
-	float: left;
-	margin: 6px;
-	margin-top: -20px;
-	width: 18px;
-	height: 20px;
-	background: url('images/goldCoin.png') left center;
-	background-size: 140px 20px;
-	animation: goldCoinPlay 0.7s steps(7) infinite;
-	background-repeat: no-repeat;
-}
-
-@keyframes goldCoinPlay {
-   100% { background-position: -140px; }
-}
-
-.goldCoinValue{
-	font-family: 'arcadeclassic';
-	font-weight: lighter;
-	font-size: 20px;
-	float: left;
-	margin: 6px;
-	margin-top: -20px;
-	text-align: center;
-}
 
 .starContainer{
 	position: absolute;
-	bottom: -10px;
+	bottom: -2.5vw;
 	text-align: center;
-	left:-10px;
-	width: 70px;
+	left: 0.5vw;
+	width: 16vw;
+	/*border: red solid 1px;*/
 }
 
 .star{
 	position: relative;
 	display: inline-block;
-	height: 15px;
-	width: 15px;
+	height: 4vw;
+	width: 4vw;
 	background: url('images/star.png');
-	background-size: 15px 15px;
+	background-size: 4vw 4vw;
 	z-index: 11;
-	margin:-1px;
+	margin: -1px;
 }
 
 .rolesContainer{
 	position: absolute;
-	top: 5px;
-	left: 20px;
-	width: 160px;
+	top: 2vh;
+	left: 2vw;
+	width: 45vw;
+	/*border: green solid 1px;*/
+	height: 35vh;
+}
+
+.dummy_space1{
+	/*visibility: hidden;*/
+	position: relative;
+	display: inline-block;
+	height: 28vw;
+	width: 4vw;
+	margin-right: -4vw;
+	margin-top: 0;
+	/*border: yellow solid 1px;*/
 }
 
 .role{
 	position: relative;
-	width: 50px;
-	height: 85px;
-	margin-top: 20px;
-	margin-left: 15px;
+	width: 17vw;
+	height: 28vw;
+	margin-top: 0;
+	margin-left: 2vw;
+	margin-right: -4vw;
 	display: inline-block;
 	text-align: center;
 	color: black;
 	font-size: 5px;
+	/*border: red solid 1px;*/
+
 }
 
 .role:active {
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 .curtain_none{
@@ -642,68 +667,68 @@ body {
 
 .curtain_left{
 	position: absolute;
-	height: 60px;
-	width: 20px;
-	top: -12px;
-	left: -3px;
+	height: 18vw;
+	width: 6.5vw;
+	top: 0;
+	left: 0;
 	background: url('images/curtain_left.png');
-	background-size: 20px 60px;
+	background-size: 7vw 18vw;
 	z-index:12;
 }
 
 .curtain_right{
 	position: absolute;
-	height: 60px;
-	width: 20px;
-	top: -12px;
-	right: -3px;
+	height: 18vw;
+	width: 6.5vw;
+	top: 0;
+	right: 0;
 	background: url('images/curtain_right.png');
-	background-size: 20px 60px;
-	z-index:12;
+	background-size: 7vw 18vw;
+	z-index: 12;
 }
 
 .curtain_top{
 	position: absolute;
-	height: 15px;
-	width: 50px;
-	top: -12px;
-	left: 0px;
+	height: 6vw;
+	width: 10vw;
+	top: 0;
+	left: 3.5vw;
 	background: url('images/curtain_top.png');
-	background-size: 50px 15px;
+	background-size: 10vw 6vw;
 	z-index:10;
 }
 
 .char{
 	position:absolute;
-	left: 10px;
-	bottom: 15px;
-	width:30px;
-	height:75px;
-	z-index:11;
+	left: 4vw;
+	bottom: 3vw;
+	width: 9vw;
+	height: 23vw;
+	z-index: 11;
 }
 
 .abled .detective{
 	background: url('images/char/detective.png');
-	background-size: 30px 75px;
+	background-size: 9vw 23vw;
 	-webkit-animation: char_pop 2.0s;
 	animation: char_pop 2.0s；
 	opacity: 1.0;
 }
 
 @-webkit-keyframes char_pop {
-  from {opacity: 0.0;} 
-  to {opacity: 1.0;}
+	from {opacity: 0.0;} 
+	to {opacity: 1.0;}
 }
 
 @keyframes char_pop {
-  from {opacity: 0.0;} 
-  to {opacity: 1.0;}
+	from {opacity: 0.0;} 
+	to {opacity: 1.0;}
 }
 
 
 .abled .gangster{
 	background: url('images/char/gangster.png');
-	background-size: 30px 75px;
+	background-size: 9vw 23vw;
 	-webkit-animation: char_pop 2.0s;
 	animation: char_pop 2.0s；
 	opacity: 1.0;
@@ -711,7 +736,7 @@ body {
 
 .abled .farmer{
 	background: url('images/char/farmer.png');
-	background-size: 30px 75px;
+	background-size: 9vw 23vw;
 	-webkit-animation: char_pop 2.0s;
 	animation: char_pop 2.0s；
 	opacity: 1.0;
@@ -719,7 +744,7 @@ body {
 
 .abled .geisha{
 	background: url('images/char/geisha.png');
-	background-size: 30px 75px;
+	background-size: 9vw 23vw;
 	-webkit-animation: char_pop 2.0s;
 	animation: char_pop 2.0s；
 	opacity: 1.0;
@@ -727,7 +752,7 @@ body {
 
 .unabled .char{
 	background: url('images/char/char_unknown.png');
-	background-size: 30px 75px;
+	background-size: 9vw 23vw;
 	-webkit-animation: char_pop 2.0s;
 	animation: char_pop 2.0s；
 	opacity: 1.0;
@@ -735,22 +760,19 @@ body {
 
 .carpet{
 	position:absolute;
-	bottom:0px;
-	left: 0px;
-	bottom: 0px;
-	width: 50px;
-	height: 35px;
+	left: 1vw;
+	bottom: 0;
+	width: 15vw;
+	height: 11vw;
 	background-repeat: no-repeat;
 	background: url('images/carpet.png');
-	background-size: 50px 35px;
+	background-size: 15vw 11vw;
 	z-index:10;
 }
 
 .upgrade{
-
 	bottom: 10px;
 	left: 50%;
-
 }
 
 .insert{
@@ -761,7 +783,7 @@ body {
 .roleimg{
 	position: absolute;
 	left: 5%;
-	top:20%;
+	top: 20%;
 }
 .rolelevel{
 	position: absolute;
@@ -778,72 +800,71 @@ body {
 #battle_warning{
 	display: none;
 	position: absolute;
-	top: 15%;
-	left: 0%;
-	width: 100%;
-	font-size: 30px;
+	top: 15vh;
+	left: 0;
+	width: 100vw;
+	font-size: 8vw;
 	text-align: center;
 }
 
 #battle_result{
 	display: none;
 	position: absolute;
-	top: 15%;
-	left: 0%;
-	width: 100%;
-	font-size: 30px;
+	top: 15vh;
+	left: 0;
+	width: 100vw;
+	font-size: 7vw;
 	text-align: center;
 }
 
 #switch_warning{
 	display: none;
 	position: absolute;
-	top: 20%;
-	left: 0%;
-	width: 100%;
-	font-size: 30px;
+	top: 20vh;
+	left: 0;
+	width: 100vw;
+	font-size: 8vw;
 	text-align: center;
 }
 
 #switch_result_passive{
 	display: none;
 	position: absolute;
-	top: 20%;
-	left: 0%;
-	width: 100%;
-	font-size: 30px;
+	top: 20vh;
+	left: 0;
+	width: 100vw;
+	font-size: 7vw;
 	text-align: center;
 }
-
 
 #switch_confirmation{
 	display: none;
 	position: absolute;
-	top: 50%;
-	left: 0%;
-	width: 100%;
-	font-size: 30px;
+	top: 50vh;
+	left: 0;
+	width: 100vw;
+	font-size: 8vw;
 	text-align: center;
 }
 
 #switch_result_active{
 	display: none;
 	position: absolute;
-	top: 50%;
-	left: 0%;
-	width: 100%;
-	font-size: 30px;
+	top: 50vh;
+	left: 0;
+	width: 100vw;
+	font-size: 7vw;
 	text-align: center;
 }
 
 .notePopup1{
 	position: absolute;
-	top: 30%;
-	left: 0%;
-	width: 100%;
-	height: 80px;
+	top: 35vh;
+	left: 0;
+	width: 100vw;
+	height: 10vh;
 	background: url('images/messsage_popup1.png');
-	background-size: 100% 80px;
+	background-size: 100vw 10vh;
 	background-repeat: no-repeat;
 	-webkit-animation: pop_a 0.3s;
 	animation: pop_a 0.3s；
@@ -851,52 +872,51 @@ body {
 
 .notePopup1 > .noteContainer{
 	position: absolute;
-	left: 5%;
-	top: 10px;
-	width: 90%;
-	height: 60px;
+	left: 5vw;
+	top: 1vh;
+	width: 90vw;
+	height: 8vh;
 	-webkit-animation: notetextPop 0.6s;
 	animation: notetextPop 0.6s；
 }
 
 @-webkit-keyframes notetextPop {
-  from {left: -200%;} 
-  to {left: 5%;}
+	from {left: -200vw;} 
+	to {left: 5vw;}
 }
 
 @keyframes notetextPop {
-  from {left: -200%;} 
-  to {left: 5%;}
+	from {left: -200vw;} 
+	to {left: 5vw;}
 }
 
 .notePopup1 > .noteContainer > .note{
 	position: relative;
-	font-family: "arcadeclassic";
-	font-size: 25px;
+	font-family: "levi-adobe-dia";
+	font-size: 8vw;
 	text-align: center;
 	font-weight: lighter;
 }
 
 .notePopup2{
 	position: absolute;
-	top: 45%;
-	left: 0%;
-	width: 100%;
-	height: 80px;
+	top: 48vh;
+	height: 4vh; 
+	width: 100vw;
 	background: url('images/messsage_popup1.png');
-	background-size: 100% 30px;
-	background-repeat: no-repeat;
+	background-size: 100vw 4vh;
 	-webkit-animation: pop_b 0.6s;
 	animation: pop_b 0.6s；
 }
 
 .notePopup2 > .note{
+	font-family: 'arcadeclassic';
 	position: absolute;
-	left: 35%;
-	font-family: "arcadeclassic";
-	font-size: 25px;
-	text-align: center;
-	font-weight: lighter;
+	left: 35vw;
+	top: 1vh;
+	color: yellow;
+	font-size: 5vw;
+	text-align: center;	
 	-webkit-animation: pop_text_b 0.9s;
 	animation: pop_text_b 0.9s；
 }
@@ -904,8 +924,8 @@ body {
 .sky{
 	-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	background: url('images/sky.png');
 	width: 100%;
 	height: 10%;
@@ -914,36 +934,37 @@ body {
 .loading{
 	position: absolute;
 	font-family: "arcadeclassic";
-	font-size: 30px;
+	font-size: 9vw;
 	text-align: center;
 	font-weight: normal;
-	top: 45%;
-	left: 40%;
+	top: 45vh;
+	height: 10vh;
+	width: 100vw;
+	left: 0;
 }
- /*===================END==================*/
+/*===================END==================*/
 
 
 /*===================STORY==================*/
 
-.story_container{
+.background_container{
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	background: url('images/background.png');
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
 }
 
 .landscape{
 	position: absolute;
-	bottom: 0px;
+	bottom: -3vh;
 	left: 5%;
 	background: url('images/landscape.png');
-	background-size: 350px auto;
-	width: 100%;
-  	height: 30vh;
-  	background-repeat: no-repeat;
-
+	background-size: 90vw auto;
+	width: 100vw;
+	height: 30vh;
+	background-repeat: no-repeat;
 }
 
 .cloud1{
@@ -953,30 +974,30 @@ body {
 	background: url('images/cloud1.png');
 	background-size: 90px auto;
 	width: 100px;
-  	height: 100px;
-  	background-repeat: no-repeat;
+	height: 100px;
+	background-repeat: no-repeat;
 
-  	-webkit-animation-name: cloud_a; /* Safari 4.0 - 8.0 */
-  	-webkit-animation-duration: 25s; /* Safari 4.0 - 8.0 */
-  	-webkit-animation-timing-function: linear;
-  	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: cloud_a; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 25s; /* Safari 4.0 - 8.0 */
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
 
-  	animation-name: cloud_a;
-  	animation-duration: 23s;
-  	animation-timing-function: linear;
-  	animation-iteration-count: infinite;
+	animation-name: cloud_a;
+	animation-duration: 23s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
 }
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes cloud_a {
-  from {left: -50px;}
-  to {left: 100%;}
+	from {left: -50px;}
+	to {left: 100%;}
 }
 
 /* Standard syntax */
 @keyframes cloud_a {
-  from {left: -50px;}
-  to {left: 100%;}
+	from {left: -50px;}
+	to {left: 100%;}
 }
 
 .cloud2{
@@ -986,118 +1007,119 @@ body {
 	background: url('images/cloud2.png');
 	background-size: 100px 50px;
 	width: 200px;
-  	height: 100px;
-  	background-repeat: no-repeat;
+	height: 100px;
+	background-repeat: no-repeat;
 
-  	-webkit-animation-name: cloud_b; /* Safari 4.0 - 8.0 */
-  	-webkit-animation-duration: 30s; /* Safari 4.0 - 8.0 */
-  	-webkit-animation-timing-function: linear;
-  	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-name: cloud_b; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 30s; /* Safari 4.0 - 8.0 */
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
 
-  	animation-name: cloud_b;
-  	animation-duration: 35s;
-  	animation-timing-function: linear;
-  	animation-iteration-count: infinite;
+	animation-name: cloud_b;
+	animation-duration: 35s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
 }
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes cloud_b {
-  from {left: -20px;}
-  to {left: 100%;}
+	from {left: -20px;}
+	to {left: 100%;}
 }
 
 /* Standard syntax */
 @keyframes cloud_b {
-  from {left: -20px;}
-  to {left: 100%;}
+	from {left: -20px;}
+	to {left: 100%;}
 }
 
 /*petal does not garantee working on safri 4.0-8.0 as cloud does*/
 .petal1{
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	background: url('images/petal.png');
 	background-size: 10px auto;
 	width: 10px;
-  	height: 10px;
-  	background-repeat: no-repeat;
+	height: 10px;
+	background-repeat: no-repeat;
 
-  	animation: petal_a 35s ease-out infinite;
-  	z-index: 20;
+	animation: petal_a 35s ease-out infinite;
+	z-index: 20;
 }
 
 /* Standard syntax */
 @keyframes petal_a {
-  from {top: 0px; left: 0px;transform: rotate(0deg); }
-  to {top: 100%;left: 70%;transform: rotate(-780deg); }
+	from {top: 0; left: 0;transform: rotate(0deg); }
+	to {top: 100%;left: 70%;transform: rotate(-780deg); }
 }
 
 .petal2{
 	position: absolute;
 	top: 100px;
-	left: 0px;
+	left: 0;
 	background: url('images/petal.png');
 	transform: rotate(160deg); 
 	background-size: 8px auto;
 	width: 10px;
-  	height: 10px;
-  	background-repeat: no-repeat;
- 	animation: petal_b 28s ease infinite;
-  	z-index: 20;
+	height: 10px;
+	background-repeat: no-repeat;
+	animation: petal_b 28s ease infinite;
+	z-index: 20;
 }
 
 /* Standard syntax */
 @keyframes petal_b {
-  from {top: 100px; left: 0px;transform: rotate(160deg); }
-  to {top: 80%;left: 70%;transform: rotate(-300deg); }
+	from {top: 100px; left: 0;transform: rotate(160deg); }
+	to {top: 80%;left: 70%;transform: rotate(-300deg); }
 }
 
 .petal3{
 	position: absolute;
 	top: 300px;
-	left: 0px;
+	left: 0;
 	background: url('images/petal.png');
 	transform: rotate(10deg); 
 	background-size: 9px auto;
 	width: 10px;
-  	height: 10px;
-  	background-repeat: no-repeat;
+	height: 10px;
+	background-repeat: no-repeat;
 
-  animation: petal_c 25s linear infinite;
-  z-index: 20;
+	animation: petal_c 25s linear infinite;
+	z-index: 20;
 }
 
 /* Standard syntax */
 @keyframes petal_c {
-  from {top: 300px; left: 0px;transform: rotate(10deg); }
-  to {top: 80%; left: 70%;transform: rotate(-450deg); }
+	from {top: 300px; left: 0;transform: rotate(10deg); }
+	to {top: 80%; left: 70%;transform: rotate(-450deg); }
 }
 
 .title{
 	position: absolute;
-	width: 100px;
-	top: 25%;
-	left: 15%;
+	width: 20vw;
+	top: 25vh;
+	left: 12vw;
 	font-family: "arcadeclassic";
-	font-size: 50px;
+	font-size: 13vw;
 	text-align: center;
 	font-weight: normal;
 }
 
 .story{
 	position: absolute;
-	font-family: "arcadeclassic";
+	font-family: "levi-adobe-dia";
 	text-align: center;
 	font-weight: lighter;
-	font-size: 20px;
-	top: 30%;
-	left: 10%;
-	width: 80%;
-	height: 50%;
-	letter-spacing: 0.05em;
-	word-spacing: 2px;
+	font-size: 8vw;
+	top: 15vh;
+	left: 5vw;
+	width: 90vw;
+	height: 60vh;
 	line-height: 1.4;
+	display: flex;
+	align-items: center;
+	/*border: black solid 1px;*/
 }
 
 .paragraph{
@@ -1106,60 +1128,38 @@ body {
 
 .story_skip{
 	position: absolute;
-	width: 150px;
-	top: 60%;
-	left: 55%;
+	width: 100vw;
+	top: 63vh;
+	right: 10vw;
 	font-family: "arcadeclassic";
-	font-size: 20px;
-	text-align: center;
+	font-size: 6vw;
+	text-align: right;
 	font-weight: normal;
 }
 
 .story_skip:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 .story_start{
 	position: absolute;
-	width: 150px;
-	top: 55%;
-	left: 55%;
+	width: 100vw;
+	top: 56vh;
+	right: 10vw;
 	font-family: "arcadeclassic";
-	font-size: 20px;
-	text-align: center;
+	font-size: 6vw;
+	text-align: right;
 	font-weight: normal;
 }
 
 .story_start:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 /*===================END==================*/
 
 
 /*===================MENU==================*/
 
-#page_flipper1{
-	position: absolute;
-	bottom: 18%;
-	left: 47%;
-	width: 20px;
-	height: 40px;
-	background: url('images/next.png');
-	background-size: 20px auto;
-	background-repeat: no-repeat;
-	text-align: center;
-}
-#page_flipper2{
-	position: absolute;
-	bottom: 18%;
-	left: 47%;
-	width: 20px;
-	height: 40px;
-	background: url('images/next.png');
-	background-size: 20px auto;
-	background-repeat: no-repeat;
-	transform: rotate(180deg);
-}
 
 #part2{
 	visibility: hidden;
@@ -1167,10 +1167,10 @@ body {
 
 .menu{
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	background: url('images/background.png');
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
 	z-index: 100;
 	opacity: 1.0;
@@ -1178,13 +1178,13 @@ body {
 
 #level1_menu{
 	position: absolute;
-	top: 35%;
-	left: 20%;
-	width: 60%;
-	height: 40%;
-	font-size: 35px;
+	top: 35vh;
+	left: 20vw;
+	width: 60vw;
+	height: 40vh;
+	font-size: 8vw;
 	text-align: center;
-	line-height: 2;
+	line-height: 20vw;
 	opacity: 1.0;
 }
 
@@ -1194,71 +1194,108 @@ body {
 }
 
 .resume:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 .instruction:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 .quit:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 #p1_text{
+	font-family:'levi-adobe-dia';
 	position: absolute;
-	width: 85%;
-	top: 10%;
-	left: 10%;
-	font-size: 23px;
+	width: 88vw;
+	top: 20vh;
+	left: 8vw;
+	font-size: 8vw;
+	line-height: 1;
 }
 
 #p1_roles_diagram_container{
 	position: absolute;
-	top: 30%;
-	left: 10%;
-	width: 270px;
-	height: 230px;
+	top: 40vh;
+	left: 25vw;
+	width: 45vw;
+	height: 50vw;
 }
 
 #p2_text{
+	font-family:'levi-adobe-dia';
 	position: absolute;
-	width: 85%;
-	top: 10%;
-	left: 10%;
-	font-size: 23px;
+	width: 88vw;
+	top: 15vh;
+	left: 8vw;
+	font-size: 8vw;
+	line-height: 1;
 }
 
 #p2_diagram{
 	position: absolute;
-	left: 8%;
-	width: 90%;
-	top: 25%;
+	left: 6vw;
+	width: 90vw;
+	top: 28vh;
+	height: 50vh;
+	/*border: black solid 1px;*/
 }
 
 #back{
 	position: absolute;
-	bottom: 10%;
-	left: 35%;
+	bottom: 8vh;
+	left: 35vw;
 	text-align: center;
-	font-size: 35px;
-	width: 30%;
+	font-size: 8vw;
+	width: 30vw;
+}
+
+#page_flipper1{
+	position: absolute;
+	bottom: 17vh;
+	left: 47vw;
+	width: 6vw;
+	height: 10vw;
+	background: url('images/next.png');
+	background-size: 6vw 10vw;
+	background-repeat: no-repeat;
+	text-align: center;
+}
+
+#page_flipper2{
+	position: absolute;
+	bottom: 17vh;
+	left: 47vw;
+	width: 6vw;
+	height: 10vw;
+	background: url('images/next.png');
+	background-size: 6vw 10vw;
+	background-repeat: no-repeat;
+	text-align: center;
+	transform: rotate(180deg);
 }
 
 .skill_icon{
-	margin-bottom: 8px;
+	margin-bottom: 1.5vh;
 }
 
 #skill_intros{
-	font-size: 15px;
 	position: absolute;
-	top: 0px;
-	left: 65px;
+	font-family: 'levi-adobe-dia';
+	font-size: 6vw;
+	top: 0;
+	left: 18vw;
+	line-height: 0.7;
+
 }
 
 .skill_intro{
-	margin-top: 15px;
-	margin-bottom: 30px;
+	height: 12vw;
+	margin-bottom: 1.5vh;
+	display: flex;
+	align-items: center;
+	/*border: black solid 1px;*/
 }
 
 /*===================END==================*/
@@ -1266,139 +1303,164 @@ body {
 /*===================ROLE SELECTION==================*/
 .roles_diagram_container_prep{
 	position: absolute;
-	top: 20%;
-	left: 15%;
-	width: 270px;
-	height: 230px;
+	top: 31vh;
+	left: 25vw;
+	width: 45vw;
+	height: 50vw;
 }
 
 .arrow_top{
 	position: absolute;
-	left: 120px;
-	top: 50px;
-	width: 25px;
-	height: 25px;
+	left: 19vw;
+	top: 5.75vw;
+	width: 7vw;
+	height: 7vw;
 	background: url('images/arrow.png');
 	transform: rotate(0deg);
-	background-size: 25px auto;
+	background-size: 7vw auto;
 }
 .arrow_bottom{
 	position: absolute;
-	left: 120px;
-	bottom: 50px;
-	width: 25px;
-	height: 25px;
+	left: 19vw;
+	bottom: 5.75vw;
+	width: 7vw;
+	height: 7vw;
 	background: url('images/arrow.png');
 	transform: rotate(180deg);
-	background-size: 25px auto;
+	background-size: 7vw auto;
 }
 .arrow_left{
 	position: absolute;
-	left: 50px;
-	top: 100px;
-	width: 25px;
-	height: 25px;
+	left: 0.5vw;
+	top: 21.5vw;
+	width: 7vw;
+	height: 7vw;
 	background: url('images/arrow.png');
 	transform: rotate(270deg);
-	background-size: 25px auto;
+	background-size: 7vw auto;
 }
 .arrow_right{
 	position: absolute;
-	right: 55px;
-	top: 100px;
-	width: 25px;
-	height: 25px;
+	right: 0.5vw;
+	top: 21.5vw;
+	width: 7vw;
+	height: 7vw;
 	background: url('images/arrow.png');
 	transform: rotate(90deg);
-	background-size: 25px auto;
+	background-size: 7vw auto;
 }
 
 .role_prep{
-	width: 30px;
-	height: 70px;
-	margin-left: 50px;
-	margin-right: 50px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	display: inline-block;
+	width: 8vw;
+	height: 18.5vw;
 }
 
 #detective_prep{
+	position: absolute;
+	left: 0;
 	background: url('images/char/detective.png');
-	background-size: 30px 70px;
-	background-repeat: no-repeat;
-}
-
-#farmer_prep{
-	background: url('images/char/farmer.png');
-	background-size: 30px 70px;
+	background-size: 8vw 18.5vw;
 	background-repeat: no-repeat;
 }
 
 #gangster_prep{
+	position: absolute;
+	right: 0;
 	background: url('images/char/gangster.png');
-	background-size: 30px 70px;
+	background-size: 8vw 18.5vw;
 	background-repeat: no-repeat;
 }
 
 #geisha_prep{
+	position: absolute;
+	left: 0;
+	bottom: 0;
 	background: url('images/char/geisha.png');
-	background-size: 30px 70px;
+	background-size: 8vw 18.5vw;
 	background-repeat: no-repeat;
 }
 
-#detective_prep:active, #farmer_prep:active, #gangster_prep:active, #geisha_prep:active{
-	transform: translateY(4px);
+
+#farmer_prep{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background: url('images/char/farmer.png');
+	background-size: 8vw 18.5vw;
+	background-repeat: no-repeat;
 }
 
-.box{
-	width: 50px;
-	height: 80px;
-	margin-left: 40px;
-	margin-right: 40px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	display: inline-block;
+
+#detective_prep:active, #farmer_prep:active, #gangster_prep:active, #geisha_prep:active{
+	transform: translateY(0.5vw);
+}
+
+#detective_prep_box{
+	position: absolute;
+	left: -1vw;
+	top: -0.7vw;
+	width: 10vw;
+	height: 20vw;
+}
+#gangster_prep_box{
+	position: absolute;
+	right: -1vw;
+	top: -0.7vw;
+	width: 10vw;
+	height: 20vw;
+}
+#geisha_prep_box{
+	position: absolute;
+	left: -1vw;
+	bottom: -0.7vw;
+	bottom: 0;
+	width: 10vw;
+	height: 20vw;
+}
+#farmer_prep_box{
+	position: absolute;
+	right: -1vw;
+	bottom: -0.7vw;
+	width: 10vw;
+	height: 20vw;
 }
 
 .selected_box{
 	background: url('images/select_box.png');
-	background-size: 50px 80px;
+	background-size: 10vw 20vw;
 	background-repeat: no-repeat;
 }
 
 .intro_select{
 	position: absolute;
-	left: 10%;
-	top: 12%;
-   	font-family: "arcadeclassic";
-  	font-size: 30px; 
-  	width: 80%;
-  	text-align:center;	
+	left: 0;
+	top: 18vh;
+	font-family: "arcadeclassic";
+	font-size: 8vw; 
+	width: 100vw;
+	text-align:center;	
 }
 
 .intro_counter{
 	position: absolute;
-   	font-family: "arcadeclassic";
-  	font-size: 20px; 
-  	left: 20%;
-  	top: 55%;
-  	width: 60%;	
-  	text-align: center;		
+	font-family: "levi-adobe-dia";
+	font-size: 7vw; 
+	left: 10vw;
+	top: 60vh;
+	width: 80vw;	
+	text-align: center;		
 }
 
 .ok_role_prep{
 	position: absolute;
-   	font-family: "arcadeclassic";
-  	font-size: 40px; 
-  	left: 40%;
-  	top: 65%;
-  	width: 20%;	
-  	text-align: center;	
+	font-family: "arcadeclassic";
+	font-size: 10vw; 
+	left: 45vw;
+	top: 70vh;	
 }
 
 .ok_role_prep:active {
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 
@@ -1410,60 +1472,73 @@ body {
 	font-family: "arcadeclassic";
 	text-align: center;
 	font-weight: lighter;
-	top: 20%;
-	left: 0px;
-	width: 100%;
-	height: 50%;
+	top: 20vh;
+	left: 0vw;
+	width: 100vw;
+	height: 50vh;
 }
 
 .tonggle{
 	position: absolute; 
-	left: 40%;
-	margin-top: 30px;
-	font-size: 20px;
-	width: 200px;
-	text-align:center;
+	right: 8vw;
+	margin-top: 5vh;
+	font-size: 5vw;
+	width: 100vw;
+	text-align:right;
 }
 
-.username, .password{
-	margin-top: 30px;
-	font-size: 23px;
+
+.username{
+	font-weight: lighter;
+	margin-top: 15vh;
+	font-size: 6vw;
+}
+
+.password{
+	font-weight: lighter;
+	margin-top: 5vh;
+	font-size: 6vw;	
 }
 
 .login, .signup{
-	font-size: 35px;
+	font-size: 10vw;
 	text-align: center;
-	margin-bottom: 80px;
+	margin-top: 0vh;
 	font-weight: lighter;
 }
 
 input{
-   	border: 0;
-   	outline: 0;
-   	background: transparent;
-   	border-bottom: 1px solid black;
-   	width: 150px;
-   	text-align: center;
-   	font-family: "arcadeclassic";
-  	font-size: 20px;
- 	font-weight: lighter;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 1px solid black;
+	width: 150px;
+	text-align: center;
+	font-family: "arcadeclassic";
+	font-size: 20px;
+	font-weight: lighter;
 }
 
 .submit{
 	position: absolute;
-	bottom: 0px;
-	left: 45%;
-	font-size: 35px;
+	margin-top: 16vh;
+	left: 45vw;
+	font-size: 10vw;
 }
 
 .submit:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 .errormsg{
- 	position: absolute;
- 	top: 70px;
- 	left: 130px;
+	font-family: 'levi-adobe-dia';
+	width: 70vw;
+	text-align: center;
+	font-size: 6vw;
+	color: red;
+	position: absolute;
+	top: 10vh;
+	left: 15vw;
 }
 
 /*===================END==================*/
@@ -1471,67 +1546,77 @@ input{
 
 /*===================READY==================*/
 
-
 #char_ready_container{
 	position: absolute;
-	left:40%;
-	top: 25%;
-	width: 50px;
-	height: 120px;
+	left: 42vw;
+	top: 25vh;
+	width: 15vw;
+	height: 50vh;
 }
 
 .char_ready_0{
 	background: url('images/char/detective.png');
-	background-size: 50px auto;
+	background-size: 15vw auto;
 	background-repeat: no-repeat;
 }
 
 .char_ready_1{
 	background: url('images/char/gangster.png');
-	background-size: 50px auto;
+	background-size: 15vw auto;
 	background-repeat: no-repeat;
-
 }
 
 .char_ready_2{
 	background: url('images/char/farmer.png');
-	background-size: 50px auto;
+	background-size: 15vw auto;
 	background-repeat: no-repeat;
 
 }
 
 .char_ready_3{
 	background: url('images/char/geisha.png');
-	background-size: 50px auto;
+	background-size: 15vw auto;
 	background-repeat: no-repeat;
 }
 
-.info_container_ready{
-	width: 60%;
-	height: 40%;
+.left_container{
+	width: 30vw;
+	height: 40vh;
 	position: absolute;
-	top: 45%;
-	left: 25%;
-   	text-align: left;
-   	font-family: "arcadeclassic";
-  	font-size: 20px;
- 	font-weight: lighter;		
+	top: 48vh;
+	left: 25vw;
+	text-align: left;
+	font-family: "arcadeclassic";
+	font-size: 5.2vw;
+}
+.right_container{
+	width: 30vw;
+	height: 48vh;
+	position: absolute;
+	top: 48vh;
+	left: 60vw;
+	text-align: left;
+	font-family: "arcadeclassic";
+	font-size: 5.2vw;
+}
+.line_margin{
+	margin-top: 1vh;
 }
 
 .ready_prep{
-	width: 40%;
-	height: 50px;
+	width: 100vw;
+	height: 10vh;
 	position: absolute;
-	top: 62%;
-	left: 30%;
-   	text-align: center;
-   	font-family: "arcadeclassic";
-  	font-size: 30px;
- 	font-weight: lighter;		
+	top: 65vh;
+	left: 0vw;
+	text-align: center;
+	font-family: "arcadeclassic";
+	font-size: 10vw;
+	font-weight: lighter;		
 }
 
 .ready_prep:active{
-	transform: translateY(4px);
+	transform: translateY(0.5vw);
 }
 
 /*===================END==================*/
