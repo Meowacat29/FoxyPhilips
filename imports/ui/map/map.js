@@ -84,14 +84,14 @@ function onSuccess(position,map) {
     marker.setPosition(latLng);
 
     //create circle around player1
-    var circle = new google.maps.Circle({
-     map : map.instance,
-     radius: constants.FIRE_RANGE, 
-     strokeColor: "#E0FFFF",
-     fillOpacity: 0,
-     strokeWeight: 1,
-   });
-    circle.bindTo('center', marker, 'position');
+   //  var circle = new google.maps.Circle({
+   //   map : map.instance,
+   //   radius: constants.FIRE_RANGE, 
+   //   strokeColor: "#E0FFFF",
+   //   fillOpacity: 0,
+   //   strokeWeight: 1,
+   // });
+   //  circle.bindTo('center', marker, 'position');
 
     Meteor.call('players.getTargetsinView', function(error, targets){
       if(error){

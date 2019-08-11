@@ -22,7 +22,7 @@ const MAX_LEVEL = 4;
 const NUM_COINS_PER_VENTURE = 100;
 const CHEAT_TIMER_COUNTDOWN_FROM = 121;
 const CHEAT_TIMER = "cheat_timer";
-const POWER_TIMER_COUNTDOWN_FROM = 31;
+const POWER_TIMER_COUNTDOWN_FROM = 61;
 const POWER_TIMER = "power_timer";
 const CONTINOUS_ATTACK_INTERVEL = 60;
 
@@ -253,7 +253,7 @@ function removeMessages(){
 	power_status:()=>{
 		return Session.get(POWER_TIMER + Session.get("p1Role")) == null ? "":"shown";
 	},
-	targetBtn_status: ()=>{
+	attackBtn_status: ()=>{
 		return (Session.get('p2Id') == null || Session.get(Session.get('p2Id')) == 'locked') ? 'unready':'ready';
 	}
 
@@ -456,7 +456,7 @@ function prune2(){
 		random1 = Math.floor(Math.random() * MAX_ROLES); 
 		random2 = Math.floor(Math.random() * MAX_ROLES);
 	}
-		popupNotes("New Clue:<br/>Not one of " + CHARACTERS[random].toUpperCase() + " " +CHARACTERS[random2].toUpperCase());
+	popupNotes("New Clue:<br/>Not one of " + CHARACTERS[random1].toUpperCase() + " " +CHARACTERS[random2].toUpperCase());
 }
 
 function applySkill(skill){
@@ -473,10 +473,7 @@ function applySkill(skill){
 			break;
 
 	    case "CHEAT": //no target, last 2 mins
-	       //change selected character to another, change back when time's out
-	       Meteor.call('players.cheat');
-	       set_cheat_timer();
-	       document.getElementById("bar_cheat").classList.add("shown");
+	       do_cheat();
 	       break;
 
 	    case "SUPER-SWITCH": //need target, attack all, immediate
@@ -486,9 +483,7 @@ function applySkill(skill){
 		    break;
 
 	    case "POWER-MAX": //no target, last 2 mins, when applied hang at the top of the screen
-		    Meteor.call('players.power_to_max', p1Role);
-		    set_power_timer(p1Role);
-		    document.getElementById("bar_powerMax").classList.add("shown");
+		    do_power();
 		    break;
 
 	    case "ATTACK-MAX": //no target, one-time, when applied hang at the top of the screen
@@ -521,7 +516,11 @@ function show_active_switch_result(roleIndex, roleNewLevel){
 }
 
 //set a timer for cheat skills
-function set_cheat_timer(){ 
+function do_cheat(){ 
+	//set cheat
+	Meteor.call('players.cheat');
+	document.getElementById("bar_cheat").classList.add("shown");
+
 	if(Session.get("lastest_cheat_timer") == null)
 		Session.set("lastest_cheat_timer", 0);
 
@@ -535,8 +534,10 @@ function set_cheat_timer(){
 					if(timer_index == Session.get("lastest_cheat_timer")){
 						if(Session.get("cheat_timer") == 0){
 							Session.set("cheat_timer", null);
+
+							//remove cheat
 							Meteor.call('players.cheat_recover');
-							document.getElementById("bar_cheat").classList.remove("shown");				
+							document.getElementById("bar_cheat").classList.remove("shown");	
 						}else{
 							Session.set("cheat_timer", Session.get("cheat_timer")-1);
 						}
@@ -546,7 +547,14 @@ function set_cheat_timer(){
 }
 
 //set a timer for cheat skills
-function set_power_timer(_p1Role){ //_p1Role field is optional
+function do_power(){ 
+	var _p1Role = Session.get('p1Role');
+
+	//set power to max
+	Meteor.call('players.power_to_max', _p1Role);
+	document.getElementById("bar_powerMax").classList.add("shown");
+
+	//set timer
 	if(Session.get('lastest_power_timer_'+_p1Role) == null)
 		Session.set('lastest_power_timer'+_p1Role, 0);
 
@@ -556,19 +564,21 @@ function set_power_timer(_p1Role){ //_p1Role field is optional
 
 	for(var i = 0; i <= POWER_TIMER_COUNTDOWN_FROM; i++){
 		Meteor.setTimeout(()=>{
-					//store lastest timer index to prevent having multiple timers modify the time at the same time
-					if(timer_index == Session.get('lastest_power_timer'+_p1Role)){
-						if(Session.get('power_timer'+_p1Role) == 0){
-							Session.set('power_timer'+_p1Role, null);
-							Meteor.call('players.power_recover', _p1Role);
-							if(Session.get('p1Role') == _p1Role){
-								document.getElementById("bar_powerMax").classList.remove("shown");
-							}
-						}else{
-							Session.set('power_timer'+_p1Role, Session.get('power_timer'+_p1Role)-1);
-						}
+			//store lastest timer index to prevent having multiple timers modify the time at the same time
+			if(timer_index == Session.get('lastest_power_timer'+_p1Role)){
+				if(Session.get('power_timer'+_p1Role) == 0){
+					Session.set('power_timer'+_p1Role, null);
+
+					//reocver power
+					Meteor.call('players.power_recover', _p1Role);
+					if(Session.get('p1Role') == _p1Role){
+						document.getElementById("bar_powerMax").classList.remove("shown");
 					}
-				}, i * 1000 );
+				}else{
+					Session.set('power_timer'+_p1Role, Session.get('power_timer'+_p1Role)-1);
+				}
+			}
+		}, i * 1000 );
 	}
 }
 

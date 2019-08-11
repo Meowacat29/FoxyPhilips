@@ -26,44 +26,21 @@ if (Meteor.isServer) {
     // },
 
     removed: function(id) {
-      Meteor.call('players.switchStatusOff', (id._id));
+      Meteor.call('players.switchStatusOff', id._id);
+      Meteor.call('players.cleanUp', id._id);
     }
   });
 }
 
-
-if (Meteor.isClient) {
-
-}
-
-
 Meteor.methods({
-  'players.notify_a_battle': function(userId, resultValue) {
-      Players.update(
-        { '_id': userId },
-        { $set: {'battle_notification': resultValue} }
-      ); 
-  },
+  'players.cleanUp'(owner){
+    //recover cheat status
+    Meteor.call('players.cheat_recover',owner);
 
-  'players.received_a_battle': function() {
-      Players.update(
-        { 'owner': Meteor.userId() },
-        { $set: {'battle_notification': null} }
-      ); 
-  },
-
-  'players.notify_a_switch': function(userId, role, newLevel) {
-      Players.update(
-        { '_id': userId },
-        { $set: {'switch_notification': role + newLevel} }
-      ); 
-  },
-
-  'players.received_a_switch': function() {
-      Players.update(
-        { 'owner': Meteor.userId() },
-        { $set: {'switch_notification': null} }
-      ); 
+    //recover power
+    for(var i =0; i<4; i++){
+      Meteor.call('players.power_recover',i, owner);
+    }
   },
 
   'players.clearData'(){
@@ -118,7 +95,6 @@ Meteor.methods({
         {name: SKILLS[5]},
       ],
       cheat: {status: false, role: null},
-      //attackMax: true,
   	  role: index, //default index in CHARACTERS
   	  position: null,
       battle_notification: null,
@@ -234,10 +210,10 @@ Meteor.methods({
   },
 
 
-  'players.countPlayers'(){
-    //console.log("Count all documents: " + Players.find({}).fetch().length);
-    //console.log(JSON.stringify(Players.find({}).fetch()));
-  },
+  // 'players.countPlayers'(){
+  //   console.log("Count all documents: " + Players.find({}).fetch().length);
+  //   console.log(JSON.stringify(Players.find({}).fetch()));
+  // },
 
   //add a new skill to player's skill list
   //Sindex: index of skill in SKILL array.
@@ -287,16 +263,21 @@ Meteor.methods({
       );
     },
 
-    'players.power_recover'(rIndex){
-      var real_level = Players.findOne({'owner':Meteor.userId()}).characters[rIndex].real_level;
+    'players.power_recover'(rIndex, owner){
+      var userId = owner ? owner : Meteor.userId();
+
+      var real_level = Players.findOne({'owner':userId}).characters[rIndex].real_level;
+
+      if(!real_level)
+        return;
 
       Players.update(
-        { 'owner': Meteor.userId() },
+        { 'owner': userId},
         { $set: { ['characters.'+ rIndex + '.level' ]: real_level } }
       );
 
       Players.update(
-        { 'owner': Meteor.userId() },
+        { 'owner': userId},
         { $set: { ['characters.'+ rIndex + '.real_level' ]: null } }
       );
     },
@@ -362,14 +343,15 @@ Meteor.methods({
       );     
     },
 
-    'players.cheat_recover'(){
+    'players.cheat_recover'(owner){
+      var userId = owner ? owner : Meteor.userId();
       Players.update(
-        { 'owner': Meteor.userId() },
+        { 'owner': userId },
         { $set: {"cheat.status" : false }}
       );
 
       Players.update(
-        { 'owner': Meteor.userId() },
+        { 'owner': userId },
         { $set: {"cheat.role" : null} }
       );  
 
@@ -381,13 +363,6 @@ Meteor.methods({
         { $inc: {'level': 1} }
       );   
     },
-
-    // 'players.setAttackMax'(status){
-    //   Players.update(
-    //     { 'owner': Meteor.userId() },
-    //     { $set: {'attackMax': status} }
-    //   );
-    // },
 
     'players.superSwitch'(p1owner, p2Id){
       var p1roleIndex = Players.findOne({'owner': p1owner}).role;
@@ -444,7 +419,35 @@ Meteor.methods({
       if(Players.find({owner: owner}) != null)
         return true;
       return false;
-    }
+    },
+
+    'players.notify_a_battle': function(userId, resultValue) {
+      Players.update(
+        { '_id': userId },
+        { $set: {'battle_notification': resultValue} }
+      ); 
+    },
+
+    'players.received_a_battle': function() {
+        Players.update(
+          { 'owner': Meteor.userId() },
+          { $set: {'battle_notification': null} }
+        ); 
+    },
+
+    'players.notify_a_switch': function(userId, role, newLevel) {
+        Players.update(
+          { '_id': userId },
+          { $set: {'switch_notification': role + newLevel} }
+        ); 
+    },
+
+    'players.received_a_switch': function() {
+        Players.update(
+          { 'owner': Meteor.userId() },
+          { $set: {'switch_notification': null} }
+        ); 
+    },
 
 });
 
