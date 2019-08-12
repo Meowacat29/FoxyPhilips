@@ -556,7 +556,7 @@ body {
 	width: 100%;
 	-webkit-animation: attack 1s;
 	animation: attack 1s;
-	color: #a0222b;
+	/*color: #a0222b;*/
 }
 
 @-webkit-keyframes attack {
@@ -579,7 +579,7 @@ body {
 .attackBtn.unready{
 	width: 50vw;
 	height: 8vw;
-	background: url('images/attack_unready.png');
+	background: url('images/attack_1.png');
 	background-size: 50vw auto;
 	background-repeat: no-repeat;
 	/*border: black solid 1px;*/
@@ -592,7 +592,7 @@ body {
 .attackBtn.ready{
 	width: 50vw;
 	height: 8vw;
-	background: url('images/attack_ready.png');
+	background: url('images/attack_0.png');
 	background-size: 50vw auto;
 	background-repeat: no-repeat;
 	/*border: black solid 1px;*/
@@ -1537,7 +1537,7 @@ input{
 	font-family: 'levi-adobe-dia';
 	width: 70vw;
 	text-align: center;
-	font-size: 5vw;
+	font-size: 5.5vw;
 	color: red;
 	position: absolute;
 	top: 10vh;

@@ -8,6 +8,7 @@ FoxyPhilips is a multi-player mobile video game in which the players switch betw
 
 ## Licence
 FoxyPhilips contains work from multiple sources.
-  - background music by [Eric Matyas](soundimage.org)
-  - fonts: 'arcadeclassic' by [dafont](www.dafont.com); 'levi-adobe-dia' from [1001fonts](https://www.1001fonts.com/levi-adobe-dia-font.html) 
+  - Images by Aratehortua/Kalinin Ilya/sidmay/Shutterstock
+  - Music by [Eric Matyas](soundimage.org)
+  - Fonts: 'arcadeclassic' by [dafont](www.dafont.com); 'levi-adobe-dia' from [1001fonts](https://www.1001fonts.com/levi-adobe-dia-font.html) 
 
