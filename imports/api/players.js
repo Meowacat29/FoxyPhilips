@@ -416,7 +416,7 @@ Meteor.methods({
     },
 
     'players.checkPlayerExistence'(owner){
-      if(Players.find({owner: owner}) != null)
+      if(Players.findOne({owner: owner}) != null)
         return true;
       return false;
     },
