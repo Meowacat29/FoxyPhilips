@@ -2,5 +2,5 @@ env: flex
 runtime: custom
 env_variables:
   ROOT_URL: https://[foxyphilips].appspot-preview.com
-  MONGO_URL: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+  MONGO_URL: mongodb+srv://admin:adminpassword@cluster0-gszjc.gcp.mongodb.net/test?retryWrites=true&w=majority
   DISABLE_WEBSOCKETS: "1"
