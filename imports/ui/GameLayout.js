@@ -5,7 +5,12 @@ Template.GameLayout.onCreated(function(){
 	Session.set("map_status", "hidden");
 	Session.set("loading_status", "shown");
 	Session.set("menu_status", "hidden");
+	set_time_out_reload();
 });
+
+function set_time_out_reload(){
+	Meteor.setTimeout(()=>{if(Session.get("map_status") == "hidden") window.location.reload(true);}, 8000);
+}
 
 Template.GameLayout.helpers({
 	menu_status:()=>{
